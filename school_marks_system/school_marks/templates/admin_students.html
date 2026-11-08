@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Students{% endblock %}
+{% block content %}
+<div class="head"><div><h1>Students</h1><div class="muted">Every student of the school. Search by name or student code, or choose one class.</div></div>
+  <div class="actions"><a class="btn" href="{{ url_for('admin_import') }}">Import student lists (Excel)</a></div></div>
+
+<form method="get" class="infobar" role="search" style="align-items:flex-end">
+  <div style="flex:1 1 220px"><span>Search</span><input type="search" name="q" value="{{ q }}" placeholder="Name or student code" aria-label="Name or student code" maxlength="60"></div>
+  <div style="flex:0 1 220px"><span>Class</span><select name="class_id" aria-label="Class" onchange="this.form.submit()"><option value="">All classes</option>
+    {% for c in classes %}<option value="{{ c.id }}" {{ 'selected' if c.id == class_id }}>{{ c.name }}</option>{% endfor %}</select></div>
+  <button class="btn" type="submit">Search</button>
+  {% if q or class_id %}<a class="btn ghost" href="{{ url_for('admin_students') }}">Show all</a>{% endif %}
+</form>
+
+<div class="classgroup">
+  <div class="cg-head"><span class="cg-dot" aria-hidden="true"></span><span class="cg-title"><b>{% if q or class_id %}Students found{% else %}All students{% endif %}</b>
+    <span>{% if total %}Showing {{ first + 1 }}–{{ first + students|length }} of {{ total }}{% else %}Nothing to show{% endif %}{% if q or class_id %} · the school has {{ everyone }} students{% endif %}</span></span>
+    <span class="cg-count">{{ total }} student{{ '' if total == 1 else 's' }}</span></div>
+  {% if students %}
+  <div class="scroll"><table class="classes">
+    <thead><tr><th>No.</th><th>Student code</th><th class="left">Names</th><th>Gender</th><th>Grade</th><th>Classroom</th><th class="acts-h">Actions</th></tr></thead>
+    <tbody>
+    {% for s in students %}
+      <tr><td class="n">{{ first + loop.index }}</td><td>{{ s.admission_no }}</td><td class="strong">{{ s.full_name }}</td><td>{{ s.gender or '–' }}</td>
+        <td>{{ s.grade_shown or '–' }}</td>
+        <td><a href="{{ url_for('admin_class', class_id=s.class_id, tab='students') }}"><span class="group-pill">{{ s.class_name }}</span></a></td>
+        <td class="acts-c"><a class="btn sm ghost" href="{{ url_for('student_edit', sid=s.id) }}">Edit / delete</a></td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+  {% elif everyone %}<div class="empty">No student matches. Check the spelling, or press “Show all”.</div>
+  {% else %}<div class="empty">There are no students yet. Import the student lists from Excel, or add students inside a class (Classes → Manage → Students).</div>{% endif %}
+</div>
+{% if pages > 1 %}
+<div class="actions" style="justify-content:center">
+  {% if page > 1 %}<a class="btn sm ghost" href="{{ url_for('admin_students', q=q or none, class_id=class_id or none, page=page - 1) }}">← Previous</a>{% endif %}
+  <span class="small muted">Page {{ page }} of {{ pages }}</span>
+  {% if page < pages %}<a class="btn sm ghost" href="{{ url_for('admin_students', q=q or none, class_id=class_id or none, page=page + 1) }}">Next →</a>{% endif %}
+</div>
+{% endif %}
+<p class="hint">To add a student, open the class under <a href="{{ url_for('admin_classes') }}">Classes</a> → Manage → Students.</p>
+{% endblock %}

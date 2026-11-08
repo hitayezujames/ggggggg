@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}{{ cls.name }} {{ 'results' if res else 'conduct and remarks' }}{% endblock %}
+{% block content %}
+<div class="head">
+  <div><div class="crumb"><a href="{{ url_for('home') }}">{{ 'Dashboard' if user.role == 'admin' else 'My classes' }}</a> ›</div>
+    <h1>{{ cls.name }} <span class="muted">· {{ 'results' if res else 'conduct and remarks' }}</span></h1>
+    <div class="muted">{{ term.name }} · Class teacher: {{ cls.class_teacher_name or 'not chosen' }} · {{ students|length }} students</div></div>
+  <div class="actions">{% include "_term.html" %}
+    <a class="btn ghost" href="{{ url_for('class_students', class_id=cls.id) }}">Add / delete students</a>
+    {% if res %}<a class="btn ghost" target="_blank" href="{{ url_for('class_marksheet_pdf', class_id=cls.id, term=term.id) }}">Class marksheet PDF</a>
+    <a class="btn ghost" target="_blank" href="{{ url_for('report_cards_pdf', class_id=cls.id, term=term.id) }}">Termly report cards PDF</a>
+    <a class="btn" target="_blank" href="{{ url_for('periodical_pdf', class_id=cls.id, term=term.id) }}">Periodical reports PDF</a>{% endif %}</div>
+</div>
+
+{% if not res %}
+<div class="card">
+  <h2>What you can do for {{ cls.name }}</h2>
+  <p>You are the class teacher. You manage the <a href="{{ url_for('class_students', class_id=cls.id) }}">students</a> of this class and write their conduct and remarks below.</p>
+  <p>Every teacher sees only the marks of the subjects they teach. The marks of the other teachers, the class results and the report cards are with the <b>administrator</b>, who generates the reports once all teachers have entered their marks.</p>
+  {% if own_subjects %}<p style="margin:0">Your own subject{{ 's' if own_subjects|length > 1 }} in this class: {% for a in own_subjects %}<a class="btn sm ghost" href="{{ url_for('marks', alloc_id=a.id, term=term.id) }}">{{ a.name }} – enter marks</a> {% endfor %}</p>
+  {% else %}<p class="hint" style="margin:0">You do not teach a subject in this class.</p>{% endif %}
+</div>
+{% else %}
+{% if not res.subjects %}<div class="notice">No subject has been assigned to a teacher in this class yet. The admin does this on the class page.</div>{% endif %}
+
+<div class="card flush">
+  <h2>Marks per subject, as on the report</h2>
+  <p class="hint">Each subject is shown out of its own maximum. “–” means the subject teacher has not finished entering marks (a mark needs tests and the exam).</p>
+  {% if res.students %}
+  <div class="scroll"><table>
+    <thead><tr><th class="n">#</th><th>Student</th>
+      <th class="n">Total<br><span style="font-weight:400">/{{ res.total_max|num }}</span></th><th class="n">%</th><th class="n">Position</th><th class="n">Result</th><th>Reports</th>
+      {% for sub in res.subjects %}<th class="n sub" title="{{ sub.name }} – {{ sub.teacher_name or 'no teacher chosen' }}">{% if user.role == 'admin' and sub.allocation_id %}<a href="{{ url_for('marks', alloc_id=sub.allocation_id, term=term.id) }}">{{ sub.code }}</a>{% else %}{{ sub.code }}{% endif %}<br><span style="font-weight:400">/{{ sub.max_mark|num }}</span></th>{% endfor %}
+      </tr></thead>
+    <tbody>
+    {% for s in res.students %}
+      {% set m = res.summary[s.id] %}
+      <tr><td class="n muted">{{ loop.index }}</td><td class="strong nowrap">{{ s.full_name }}</td>
+        <td class="n strong">{{ m.total|num or '–' }}</td><td class="n strong">{{ m.percentage|pct }}</td>
+        <td class="n nowrap">{% if m.position %}{{ m.position }} / {{ res.students|length }}{% else %}–{% endif %}</td>
+        <td class="n">{% if m.passed is none %}<span class="tag wait">{{ 'incomplete' if m.done else 'no marks' }}</span>{% elif m.passed %}<span class="tag ok">pass</span>{% else %}<span class="tag bad">fail</span>{% endif %}</td>
+        <td class="nowrap"><a class="btn sm" target="_blank" href="{{ url_for('periodical_pdf', class_id=cls.id, term=term.id, student=s.id) }}" title="Tests only">Periodical</a>
+          <a class="btn sm ghost" target="_blank" href="{{ url_for('report_cards_pdf', class_id=cls.id, term=term.id, student=s.id) }}" title="Tests and exam">Termly</a></td>
+        {% for sub in res.subjects %}<td class="n sub">{{ res.per_subject[sub.id].rows[s.id].mark|num or '–' }}</td>{% endfor %}</tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+  {% else %}<div class="empty">This class has no students yet.</div>{% endif %}
+  {% if res.subjects %}<div class="empty small">{% for sub in res.subjects %}<b>{{ sub.code }}</b> {{ sub.name }} ({{ sub.teacher_name or 'no teacher chosen' }}){{ ' · ' if not loop.last }}{% endfor %}</div>{% endif %}
+</div>
+{% endif %}
+
+{% if students %}
+<form method="post" action="{{ url_for('class_remarks', class_id=cls.id) }}" class="card flush" id="remarks">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="term" value="{{ term.id }}">
+  <h2>Conduct and class teacher's remarks</h2>
+  <p class="hint">Printed on each student's report. Conduct is out of {{ '%g'|format(cfg.conduct_max_num) }}: leave it empty for full marks, or type a lower number. It is not added to the total.</p>
+  {% if not editable %}<div class="empty">{{ term.name }} is locked, so remarks cannot be changed.</div>{% endif %}
+  <div class="scroll"><table class="remarks">
+    <thead><tr><th>Student</th>{% if res %}<th class="n">%</th>{% endif %}<th>Conduct /{{ '%g'|format(cfg.conduct_max_num) }}</th><th>Days absent</th><th>Remark</th></tr></thead>
+    <tbody>
+    {% for s in students %}
+      {% set rm = remarks.get(s.id) %}
+      <tr><td class="strong nowrap">{{ s.full_name }}</td>{% if res %}<td class="n">{{ res.summary[s.id].percentage|pct }}</td>{% endif %}
+        <td><input type="text" inputmode="decimal" name="conduct_{{ s.id }}" maxlength="6" value="{{ rm.conduct if rm else '' }}" placeholder="{{ '%g'|format(cfg.conduct_max_num) }}" style="width:80px;min-width:0" aria-label="Conduct – {{ s.full_name }}" {{ 'disabled' if not editable }}></td>
+        <td><input type="text" inputmode="numeric" name="absent_{{ s.id }}" maxlength="6" value="{{ rm.days_absent if rm else '' }}" style="width:80px;min-width:0" aria-label="Days absent – {{ s.full_name }}" {{ 'disabled' if not editable }}></td>
+        <td class="wide"><input type="text" name="remark_{{ s.id }}" maxlength="300" value="{{ rm.remark if rm else '' }}" aria-label="Remark – {{ s.full_name }}" {{ 'disabled' if not editable }}></td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+  {% if editable %}<div class="savebar"><button class="btn" type="submit">Save remarks</button></div>{% endif %}
+</form>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="head"><div><h1>Dashboard</h1><div class="muted">{% if term %}Showing {{ term.name }}{% if term.is_locked %} · <span class="tag off">locked</span>{% endif %}{% endif %}</div></div>
+  {% if term %}{% include "_term.html" %}{% endif %}</div>
+
+{% if not term or not counts.subjects or not counts.classes %}
+<div class="notice"><b>Getting started:</b>
+  1. <a href="{{ url_for('admin_terms') }}">Add an academic year</a> ·
+  2. <a href="{{ url_for('admin_subjects') }}">Check the levels and their subjects</a> ·
+  3. <a href="{{ url_for('admin_classes') }}">Add classes and students</a> ·
+  4. Ask staff to register their accounts, then <a href="{{ url_for('admin_teachers') }}">approve them</a> ·
+  5. Open each class and choose the class teacher and the teacher for every subject.</div>
+{% endif %}
+
+{% set icons = {
+    'students': '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+    'staff': '<path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2.5 9 2.5 12 0v-5"/>',
+    'classes': '<path d="M10 6h11M10 12h11M10 18h11"/><path d="m3 6 1 1 2-2M3 12l1 1 2-2M3 18l1 1 2-2"/>',
+    'classrooms': '<path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-5h6v5M9 10h.01M15 10h.01"/>',
+} %}
+{% set tiles = [
+    ('c1', 'students', 'Total Students', '{:,}'.format(counts.students), 'Registered students', url_for('admin_students')),
+    ('c2', 'staff', 'Active Staff', '{:,}'.format(counts.teachers), 'Teaching and administrative staff', url_for('admin_teachers')),
+    ('c3', 'classes', 'Classes', '{:,}'.format(counts.classes), 'Class groups', url_for('admin_classes')),
+    ('c4', 'classrooms', 'Classrooms', '{:,}'.format(facts.classrooms|int) if facts.classrooms != '' else '', 'Physical classrooms', url_for('admin_settings') ~ '#numbers'),
+] %}
+<div class="tiles">
+{% for t in tiles %}
+  <a class="tile {{ t[0] }}" href="{{ t[5] }}"><span class="ticon"><svg viewBox="0 0 24 24" aria-hidden="true">{{ icons[t[1]]|safe }}</svg></span><span class="tlabel">{{ t[2] }}</span>{% if t[3] != '' %}<b>{{ t[3] }}</b><span class="tsub">{{ t[4] }}</span>{% else %}<b class="unset">–</b><span class="tsub">Not typed yet: click to set it</span>{% endif %}</a>
+{% endfor %}
+</div>
+
+<div class="card chartcard"><div class="charthead"><b>Student Registration by Classes</b><span>{{ school_name }}{% if term and term.year != '' %} · {{ term.year }}{% endif %}</span></div>
+  {% if chart.bars %}
+  <div class="chartbody scroll"><svg viewBox="0 0 1000 360" role="img" aria-label="Number of students in each class">
+    {% for tick in chart.ticks %}<line class="grid" x1="64" x2="990" y1="{{ tick.y }}" y2="{{ tick.y }}"/><text class="tick" x="54" y="{{ tick.y + 4 }}" text-anchor="end">{{ tick.value }}</text>{% endfor %}
+    <text class="axis" x="18" y="150" text-anchor="middle" transform="rotate(-90 18 150)">Student Number</text>
+    {% for bar in chart.bars %}<a href="{{ url_for('admin_class', class_id=bar.id) }}"><rect x="{{ bar.x }}" y="{{ bar.y }}" width="{{ bar.width }}" height="{{ bar.height }}" rx="4" fill="{{ bar.colour }}"><title>{{ bar.name }}: {{ bar.count }} student{{ '' if bar.count == 1 else 's' }}</title></rect></a><text class="val" x="{{ bar.middle }}" y="{{ bar.y - 6 }}" text-anchor="middle">{{ bar.count }}</text><text class="lab" x="{{ bar.middle + 4 }}" y="290" text-anchor="end" transform="rotate(-40 {{ bar.middle + 4 }} 290)">{{ bar.name[:14] }}</text>{% endfor %}
+  </svg></div>
+  <div class="chartfoot"><span>{{ chart.classes }} class{{ '' if chart.classes == 1 else 'es' }}</span><b>{{ '{:,}'.format(chart.total) }} student{{ '' if chart.total == 1 else 's' }}</b></div>
+  {% else %}<div class="empty">There are no classes yet. <a href="{{ url_for('admin_classes') }}">Add classes and students</a>.</div>{% endif %}
+</div>
+
+{% if pending %}
+<div class="card flush"><h2>Staff waiting for approval</h2>
+  <p class="hint">Check the email and phone number, choose the role, then approve.</p>
+  <div class="scroll"><table><tbody>
+  {% for t in pending %}
+    <tr><td><span class="strong">{{ t.full_name }}</span><div class="small muted">{{ t.email or 'no email' }} · {{ t.phone or 'no phone' }}</div></td>
+      <td class="muted">{{ t.username }}</td><td class="small muted">registered {{ t.created_at }}</td>
+      <td class="right nowrap">
+        <form class="inline" method="post" action="{{ url_for('admin_teacher_action', uid=t.id, action='approve') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="next" value="{{ url_for('admin_dashboard') }}">
+          <select name="role" aria-label="Role for {{ t.full_name }}" style="width:auto;padding:4px 6px">{% for key, title in roles.items() %}<option value="{{ key }}">{{ title }}</option>{% endfor %}</select>
+          <button class="btn sm">Approve</button></form>
+        <form class="inline" method="post" action="{{ url_for('admin_teacher_action', uid=t.id, action='reject') }}" onsubmit="return confirm('Reject and remove this registration?')"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="next" value="{{ url_for('admin_dashboard') }}"><button class="btn sm danger">Reject</button></form>
+      </td></tr>
+  {% endfor %}
+  </tbody></table></div></div>
+{% endif %}
+
+{% if mine or my_classes %}
+<div class="card flush"><h2>My own subjects and class</h2>
+  <p class="hint">You are an Administrator who also teaches.{% for c in my_classes %} Class teacher of <a href="{{ url_for('class_results', class_id=c.id) }}">{{ c.name }}</a>.{% endfor %}</p>
+  {% if mine %}{% with progress=mine, show_teacher=false %}{% include "_progress.html" %}{% endwith %}{% endif %}
+</div>
+{% endif %}
+
+<div class="card flush"><h2>Marks entry progress{% if term %} · {{ term.name }}{% endif %}</h2>
+  <p class="hint">Every subject in every class, and how far its teacher is with entering marks.</p>
+  {% if progress %}{% with show_teacher=true %}{% include "_progress.html" %}{% endwith %}
+  {% else %}<div class="empty">No subject has been assigned to a teacher yet. Open a class to assign subjects.</div>{% endif %}
+</div>
+
+<div class="card flush"><h2>Latest activity</h2>
+  {% if activity %}
+  <div class="scroll"><table><tbody>
+    {% for a in activity %}<tr><td class="small muted nowrap">{{ a.created_at }}</td><td class="strong">{{ a.user_name }}</td><td>{{ a.action }}</td><td class="muted">{{ a.details }}</td></tr>{% endfor %}
+  </tbody></table></div>
+  <div class="empty"><a href="{{ url_for('admin_activity') }}">See the full activity log</a></div>
+  {% else %}<div class="empty">Nothing yet.</div>{% endif %}
+</div>
+{% endblock %}

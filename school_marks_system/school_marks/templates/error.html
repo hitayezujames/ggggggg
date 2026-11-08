@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class="card" style="max-width:640px">
+  <h1>{{ title }}</h1>
+  <p>{{ message }}</p>
+  {% if code == 403 and user %}
+  <p>You are logged in as <b>{{ user.full_name }}</b> ({{ roles[user.role] }}).{% if user.role != 'admin' %} This page is only for an Administrator, or for the teacher it belongs to.{% endif %}</p>
+  <p class="hint">One browser can be logged in as only <b>one person at a time</b>. If someone else logged in on this computer after you, the browser now works for that person. Log out and log in again with your own username and password.
+    To use two accounts at the same time on one computer, open the second one in a private (incognito) window or in another browser.</p>
+  {% endif %}
+  <p style="margin:0"><a class="btn" href="{{ url_for('home') }}">Go to my start page</a></p>
+</div>
+{% endblock %}
+{% block auth %}<h2>{{ title }}</h2><p>{{ message }}</p><p><a href="{{ url_for('login') }}">Back to log in</a></p>{% endblock %}

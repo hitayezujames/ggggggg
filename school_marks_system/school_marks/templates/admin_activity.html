@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Activity log{% endblock %}
+{% block content %}
+<div class="head"><div><h1>Activity log</h1><div class="muted">Everything users do in the system: log-ins, marks saved, PDFs generated, changes by the admin.</div></div></div>
+<div class="card">
+  <form method="get" class="row">
+    <div class="field"><label for="user">Person</label><select id="user" name="user"><option value="">Everyone</option>{% for p in people %}<option value="{{ p.id }}" {{ 'selected' if p.id == who }}>{{ p.full_name }}</option>{% endfor %}</select></div>
+    <div class="field"><label for="q">Search</label><input type="search" id="q" name="q" value="{{ q }}" placeholder="e.g. Saved marks, Grade 8A"></div>
+    <button class="btn ghost" type="submit">Filter</button>
+  </form>
+</div>
+<div class="card flush">
+  {% if activity %}
+  <div class="scroll"><table>
+    <thead><tr><th>When</th><th>Who</th><th>What</th><th>Details</th></tr></thead>
+    <tbody>{% for a in activity %}<tr><td class="small muted nowrap">{{ a.created_at }}</td><td class="strong">{{ a.user_name }}</td><td>{{ a.action }}</td><td class="muted">{{ a.details }}</td></tr>{% endfor %}</tbody>
+  </table></div>
+  {% else %}<div class="empty">No activity matches.</div>{% endif %}
+</div>
+<p class="small muted">Showing the latest {{ activity|length }} entries (maximum 500).</p>
+{% endblock %}

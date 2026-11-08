@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}{{ t.full_name }}{% endblock %}
+{% block content %}
+<div class="head"><div><div class="crumb"><a href="{{ url_for('admin_teachers') }}">Staff</a> ›</div><h1>{{ t.full_name }}</h1>
+  <div class="muted">{{ roles[t.role] }} · username {{ t.username }} · registered {{ t.created_at[:10] }} · {{ t.status }}</div></div></div>
+<div class="card" style="max-width:640px">
+  <h2>Details and role</h2>
+  <form method="post" autocomplete="off">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="field"><label for="full_name">Full name</label><input type="text" id="full_name" name="full_name" value="{{ form.full_name }}" required></div>
+    <div class="row">
+      <div class="field"><label for="email">Email address</label><input type="email" id="email" name="email" value="{{ form.email }}" maxlength="120" required></div>
+      <div class="field"><label for="phone">Phone number</label><input type="tel" id="phone" name="phone" value="{{ form.phone }}" maxlength="24" required></div>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <div class="field"><label for="username">Username</label><input type="text" id="username" name="username" value="{{ form.username }}" maxlength="60" required autocomplete="off"></div>
+      <div class="field"><label for="role">Role</label><select id="role" name="role">{% for key, title in roles.items() %}<option value="{{ key }}" {{ 'selected' if key == form.role }}>{{ title }}</option>{% endfor %}</select></div>
+    </div>
+    <p class="hint" style="margin-top:8px">If you change the username, tell the staff member: they log in with the new one. An <b>Administrator</b> can do everything you can, including managing staff; a <b>Teacher</b> only works with the subjects and class given below.</p>
+    <div class="field"><label for="password">New password (leave empty to keep the current one)</label><input type="text" id="password" name="password" minlength="8" autocomplete="off">
+      <div class="hint">If you type one, the staff member uses it once and the system then makes them choose their own.</div></div>
+    <p style="margin:0"><button class="btn" type="submit">Save</button> <a class="btn ghost" href="{{ url_for('admin_teachers') }}">Cancel</a></p>
+  </form>
+</div>
+
+<h2 id="work" style="margin:22px 0 10px">What {{ t.full_name }} teaches</h2>
+{% if t.status != 'active' %}<div class="notice">This account is {{ t.status }}. You can remove subjects and classes, but not give new ones until it is active.</div>{% endif %}
+
+{% macro pair_select(field_id) %}
+<select id="{{ field_id }}" name="pair" required><option value="">— choose class and subject —</option>
+  {% for group in pairs|groupby('class_name') %}
+  <optgroup label="{{ group.grouper }}">
+    {% for p in group.list if p.teacher_id != t.id %}<option value="{{ p.class_id }}:{{ p.subject_id }}">{{ p.class_name }} – {{ p.subject_name }}{% if p.teacher_name %} (now {{ p.teacher_name }}){% endif %}</option>{% endfor %}
+  </optgroup>
+  {% endfor %}
+</select>
+{% endmacro %}
+
+<div class="card flush">
+  <h2>Subjects</h2>
+  {% if allocs %}
+  <div class="scroll"><table>
+    <thead><tr><th>Class</th><th>Subject</th><th class="n">Students</th><th></th></tr></thead>
+    <tbody>
+    {% for a in allocs %}
+      <tr {% if changing == a.id %}style="background:var(--accent-soft)"{% endif %}><td class="strong">{{ a.class_name }}</td><td>{{ a.subject_name }}</td><td class="n">{{ a.n_students }}</td>
+        <td class="right nowrap">
+          <a class="btn sm ghost" href="{{ url_for('admin_teacher_edit', uid=t.id, change=a.id) }}#work">Change</a>
+          <form class="inline" method="post" action="{{ url_for('admin_teacher_subjects', uid=t.id) }}" onsubmit="return confirm('Take this subject away from this teacher? The subject will have no teacher in that class until you choose one.{% if a.n_assess %} Marks already entered are kept.{% endif %}')">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="action" value="remove"><input type="hidden" name="allocation_id" value="{{ a.id }}">
+            <button class="btn sm danger">Remove</button></form>
+        </td></tr>
+      {% if changing == a.id and t.status == 'active' %}
+      <tr style="background:var(--accent-soft)"><td colspan="4">
+        <form method="post" action="{{ url_for('admin_teacher_subjects', uid=t.id) }}" class="row">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="action" value="change"><input type="hidden" name="allocation_id" value="{{ a.id }}">
+          <div class="field"><label for="change_pair">Instead of {{ a.class_name }} – {{ a.subject_name }}, {{ t.full_name }} will teach</label>{{ pair_select('change_pair') }}</div>
+          <button class="btn" type="submit">Save change</button> <a class="btn ghost" href="{{ url_for('admin_teacher_edit', uid=t.id) }}#work">Cancel</a>
+        </form>
+        <p class="hint" style="margin:8px 0 0">{{ a.class_name }} – {{ a.subject_name }} will then have no teacher until you give it to someone. Its marks are kept.</p>
+      </td></tr>
+      {% endif %}
+    {% endfor %}
+    </tbody>
+  </table></div>
+  {% else %}<div class="empty">{{ t.full_name }} has no subjects yet.</div>{% endif %}
+  {% if t.status == 'active' %}
+  <form method="post" action="{{ url_for('admin_teacher_subjects', uid=t.id) }}" class="row" style="padding:14px 18px;border-top:1px solid var(--line-2)">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="action" value="assign">
+    <div class="field"><label for="give_pair">Give another subject</label>{{ pair_select('give_pair') }}</div>
+    <button class="btn" type="submit">Give subject</button>
+  </form>
+  <p class="hint">If the subject already has a teacher in that class (shown as “now …”), {{ t.full_name }} takes it over. The teacher sees all students of the class at once.</p>
+  {% endif %}
+</div>
+
+<div class="card flush">
+  <h2>Class teacher of</h2>
+  {% set own = classes|selectattr('class_teacher_id', 'equalto', t.id)|list %}
+  {% if own %}
+  <table><thead><tr><th>Class</th><th class="n">Students</th><th></th></tr></thead><tbody>
+  {% for c in own %}
+    <tr><td class="strong">{{ c.name }}</td><td class="n">{{ c.n_students }}</td>
+      <td class="right"><form class="inline" method="post" action="{{ url_for('admin_teacher_classes', uid=t.id) }}" onsubmit="return confirm('Stop this teacher being the class teacher of this class?')">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="action" value="remove"><input type="hidden" name="class_id" value="{{ c.id }}">
+        <button class="btn sm danger">Remove</button></form></td></tr>
+  {% endfor %}
+  </tbody></table>
+  {% else %}<div class="empty">{{ t.full_name }} is not a class teacher.</div>{% endif %}
+  {% if t.status == 'active' %}
+  <form method="post" action="{{ url_for('admin_teacher_classes', uid=t.id) }}" class="row" style="padding:14px 18px;border-top:1px solid var(--line-2)">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="action" value="add">
+    <div class="field"><label for="ct_class">Make class teacher of</label>
+      <select id="ct_class" name="class_id" required><option value="">— choose class —</option>
+        {% for c in classes if c.class_teacher_id != t.id %}<option value="{{ c.id }}">{{ c.name }}{% if c.class_teacher_name %} (now {{ c.class_teacher_name }}){% endif %}</option>{% endfor %}</select></div>
+    <button class="btn" type="submit">Save</button>
+  </form>
+  <p class="hint">The class teacher manages the students of the class and writes their conduct and remarks.{% if ct_results %} They also see the results of the class and print its report cards.{% else %} They do not see the other teachers' marks; the administrator generates the report cards.{% endif %}</p>
+  {% endif %}
+</div>
+{% endblock %}

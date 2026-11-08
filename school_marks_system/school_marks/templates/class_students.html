@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ cls.name }} students{% endblock %}
+{% block content %}
+<div class="head">
+  <div><div class="crumb"><a href="{{ url_for('home') }}">My classes</a> ›</div>
+    <h1>{{ cls.name }} <span class="muted">· students</span></h1>
+    <div class="muted">You are the class teacher. You can add students, correct their details and delete students who have left.</div></div>
+  <div class="actions"><a class="btn ghost" href="{{ url_for('class_results', class_id=cls.id) }}">{{ 'Results &amp; report cards'|safe if ct_results else 'Conduct &amp; remarks'|safe }}</a></div>
+</div>
+{% include "_students.html" %}
+{% endblock %}

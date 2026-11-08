@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}{{ alloc.subject_name }} · {{ alloc.class_name }}{% endblock %}
+{% block content %}
+{% set all_a = sr.tests + ([sr.exam] if sr.exam else []) %}
+<div class="head">
+  <div><div class="crumb"><a href="{{ url_for('home') }}">{{ 'Dashboard' if user.role == 'admin' else 'My subjects' }}</a> › {{ alloc.class_name }} ›</div>
+    <h1>{{ alloc.subject_name }} <span class="muted">· {{ alloc.class_name }}</span></h1>
+    <div class="muted">{{ term.name }} · Teacher: {{ alloc.teacher_name }} · {{ students|length }} students · counts out of <b>{{ sr.max_mark|num }}</b> on the report</div></div>
+  <div class="actions">{% include "_term.html" %}
+    <a class="btn ghost" target="_blank" href="{{ url_for('subject_pdf', alloc_id=alloc.id, term=term.id) }}">Marksheet PDF</a></div>
+</div>
+
+{% if not editable %}<div class="notice">{{ term.name }} is locked by the admin. Marks can be viewed but not changed.</div>{% endif %}
+{% if not students %}<div class="notice">This class has no students yet. The admin adds students to the class.</div>{% endif %}
+
+{% if editable %}
+<div class="card">
+  <h2>Add a test or the exam</h2>
+  <form method="post" action="{{ url_for('assessment_add', alloc_id=alloc.id) }}" class="row">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="term" value="{{ term.id }}">
+    <div class="field narrow"><label for="kind">Type</label><select id="kind" name="kind"><option value="test">Test</option>{% if not sr.exam %}<option value="exam">Exam</option>{% endif %}</select></div>
+    <div class="field"><label for="aname">Name</label><input type="text" id="aname" name="name" maxlength="40" placeholder="Test {{ sr.tests|length + 1 }}"></div>
+    <div class="field narrow"><label for="max_mark">Marked out of</label><input type="number" id="max_mark" name="max_mark" min="1" max="1000" step="any" required placeholder="50"></div>
+    <button class="btn ghost" type="submit">Add</button>
+  </form>
+  <p class="hint" style="margin:10px 0 0">You can add as many tests as you like, each out of any total. Final % = Tests % × {{ '%g'|format(cfg.test_weight_num) }}% + Exam % × {{ '%g'|format(cfg.exam_weight_num) }}%, and the report shows that as a mark out of {{ sr.max_mark|num }}.</p>
+</div>
+{% endif %}
+
+{% if all_a and students %}
+<form method="post" id="marksform" class="card flush">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="term" value="{{ term.id }}">
+  <div class="scroll"><table class="marks">
+    <thead><tr><th class="n">#</th><th class="name">Student</th>
+      {% for a in all_a %}<th class="a {{ 'exam' if a.kind == 'exam' }}">{{ a.name }}<small>out of {{ a.max_mark|num }}</small></th>{% endfor %}
+      <th class="n">Tests %</th><th class="n">Exam %</th><th class="n">Final %</th><th class="n" title="The mark printed on the report">Mark /{{ sr.max_mark|num }}</th><th class="n">Pos.</th></tr></thead>
+    <tbody>
+    {% for s in students %}
+      {% set r = sr.rows[s.id] %}
+      <tr><td class="n muted">{{ loop.index }}</td><td class="name"><span class="strong">{{ s.full_name }}</span><br><span class="small muted">{{ s.admission_no }}</span></td>
+        {% for a in all_a %}
+          {% set f = 'm_%d_%d'|format(a.id, s.id) %}
+          <td class="n {{ 'exam' if a.kind == 'exam' }}"><input type="text" inputmode="decimal" autocomplete="off" name="{{ f }}" data-max="{{ a.max_mark }}" data-col="{{ loop.index0 }}"
+            aria-label="{{ a.name }} – {{ s.full_name }}" class="{{ 'bad' if f in bad }}" value="{{ bad[f] if f in bad else sr.marks.get((a.id, s.id))|num }}" {{ 'disabled' if not editable }}></td>
+        {% endfor %}
+        <td class="calc">{{ r.tests_pct|pct }}</td><td class="calc">{{ r.exam_pct|pct }}</td><td class="calc">{{ r.final|pct }}</td>
+        <td class="calc strong">{{ r.mark|num or '–' }}</td><td class="calc">{{ r.position or '–' }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+  {% if editable %}
+  <div class="savebar"><button class="btn" type="submit">Save marks</button>
+    <span class="small muted">Leave a box empty if the student did not write. Type 0 for a real zero. Press Enter to jump to the next student. Percentages and the report mark update after saving.</span></div>
+  {% endif %}
+</form>
+{% elif students %}
+<div class="card"><div class="empty" style="padding:0">No tests yet for {{ term.name }}. {% if editable %}Add your first test above, then the students appear with a box for each mark.{% endif %}</div></div>
+<div class="card flush"><h2>Students in {{ alloc.class_name }}</h2>
+  <table><thead><tr><th class="n">#</th><th>Name</th><th>Admission no.</th><th>Gender</th></tr></thead><tbody>
+  {% for s in students %}<tr><td class="n muted">{{ loop.index }}</td><td class="strong">{{ s.full_name }}</td><td>{{ s.admission_no }}</td><td>{{ s.gender or '–' }}</td></tr>{% endfor %}
+  </tbody></table></div>
+{% endif %}
+
+{% if all_a and editable %}
+<div class="card">
+  <h2>Rename, change or delete a test</h2>
+  {% for a in all_a %}
+  <details class="manage"><summary>{{ a.name }} <span class="muted small">· out of {{ a.max_mark|num }} · {{ 'exam' if a.kind == 'exam' else 'test' }}</span></summary>
+    <div class="row" style="margin-top:10px">
+      <form method="post" action="{{ url_for('assessment_action', aid=a.id, action='edit') }}" class="row" style="flex:1">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="field"><label for="n{{ a.id }}">Name</label><input type="text" id="n{{ a.id }}" name="name" maxlength="40" value="{{ a.name }}"></div>
+        <div class="field narrow"><label for="x{{ a.id }}">Marked out of</label><input type="number" id="x{{ a.id }}" name="max_mark" min="1" max="1000" step="any" value="{{ a.max_mark|num }}"></div>
+        <button class="btn ghost" type="submit">Save</button>
+      </form>
+      <form method="post" action="{{ url_for('assessment_action', aid=a.id, action='delete') }}" onsubmit="return confirm('Delete this test and ALL the marks in it? This cannot be undone.')">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn danger" type="submit">Delete</button></form>
+    </div>
+  </details>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
+{% block scripts %}<script>
+(function () {
+  var form = document.getElementById('marksform'); if (!form) return;
+  var dirty = false;
+  function check(el) {
+    var t = el.value.trim().replace(',', '.'), v = Number(t), max = Number(el.dataset.max);
+    el.classList.toggle('bad', t !== '' && (isNaN(v) || v < 0 || v > max));
+  }
+  form.addEventListener('input', function (e) { if (e.target.dataset.max) { dirty = true; check(e.target); } });
+  form.addEventListener('keydown', function (e) {
+    var el = e.target; if (!el.dataset.max) return;
+    var step = (e.key === 'Enter' || e.key === 'ArrowDown') ? 1 : (e.key === 'ArrowUp' ? -1 : 0);
+    if (!step) return;
+    e.preventDefault();
+    var col = Array.prototype.slice.call(form.querySelectorAll('input[data-col="' + el.dataset.col + '"]'));
+    var next = col[col.indexOf(el) + step];
+    if (next) { next.focus(); next.select(); }
+  });
+  form.addEventListener('submit', function (e) {
+    var bad = form.querySelectorAll('input.bad');
+    if (bad.length && !confirm(bad.length + ' mark(s) shown in red are not valid and will NOT be saved. Save the others anyway?')) { e.preventDefault(); bad[0].focus(); return; }
+    dirty = false;
+  });
+  window.addEventListener('beforeunload', function (e) { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
+})();
+</script>{% endblock %}

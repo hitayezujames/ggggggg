@@ -1,0 +1,17 @@
+{# Marks-entry progress table. Needs: progress, term, show_teacher #}
+<div class="scroll"><table>
+  <thead><tr><th>Class</th><th>Subject</th>{% if show_teacher %}<th>Teacher</th>{% endif %}<th class="n">Students</th><th class="n">Tests</th><th class="n">Exam</th><th>Marks entered</th><th>Last change</th><th></th></tr></thead>
+  <tbody>
+  {% for p in progress %}
+    <tr>
+      <td class="strong">{{ p.class_name }}</td><td>{{ p.subject_name }}</td>
+      {% if show_teacher %}<td>{{ p.teacher_name }}</td>{% endif %}
+      <td class="n">{{ p.n_students }}</td><td class="n">{{ p.n_tests }}</td>
+      <td class="n">{% if p.n_exams %}<span class="tag ok">set</span>{% else %}<span class="tag off">none</span>{% endif %}</td>
+      <td>{% if p.expected %}<div class="bar" title="{{ p.n_marks }} of {{ p.expected }}"><i style="width:{{ p.percent }}%"></i></div><span class="small muted">{{ p.n_marks }} of {{ p.expected }} ({{ p.percent }}%)</span>{% else %}<span class="tag wait">not started</span>{% endif %}</td>
+      <td class="small muted nowrap">{{ p.last_update or '–' }}</td>
+      <td class="right"><a class="btn sm {{ 'ghost' if show_teacher }}" href="{{ url_for('marks', alloc_id=p.allocation_id, term=term.id) }}">{{ 'Open' if show_teacher else 'Enter marks' }}</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table></div>

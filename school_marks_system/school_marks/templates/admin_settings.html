@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block title %}School profile{% endblock %}
+{% block content %}
+<div class="head"><div><h1>School profile</h1><div class="muted">The school's name, phone number, email and logo. What is printed at the top and bottom of every report, and how marks are worked out.</div></div></div>
+<form method="post" enctype="multipart/form-data">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<div class="grid2">
+  <div class="card">
+    <h2>School details (top of the report)</h2>
+    <div class="field"><label for="school_name">School name</label><input type="text" id="school_name" name="school_name" value="{{ cfg.school_name }}" maxlength="120" required></div>
+    <div class="row">
+      <div class="field"><label for="school_pobox">P.O. Box</label><input type="text" id="school_pobox" name="school_pobox" value="{{ cfg.school_pobox }}" maxlength="120"></div>
+      <div class="field"><label for="school_tel">Phone number</label><input type="text" id="school_tel" name="school_tel" value="{{ cfg.school_tel }}" maxlength="120"></div>
+    </div>
+    <div class="field" style="margin-top:12px"><label for="school_email">Email</label><input type="text" id="school_email" name="school_email" value="{{ cfg.school_email }}" maxlength="120"></div>
+    <div class="field"><label for="logo">School logo (PNG or JPG)</label>
+      {% if has_logo %}<p><img src="{{ url_for('logo') }}" alt="Current school logo" style="max-height:90px;max-width:160px;border:1px solid var(--line);border-radius:4px;padding:4px;background:#fff"></p>{% endif %}
+      <input type="file" id="logo" name="logo" accept="image/png,image/jpeg">
+      {% if has_logo %}<label style="font-weight:400;margin-top:8px"><input type="checkbox" name="remove_logo" value="1"> Remove the logo</label>
+      {% else %}<div class="hint">Printed top-left on every report and marksheet.</div>{% endif %}</div>
+  </div>
+  <div class="card">
+    <h2>Report wording (title and signature)</h2>
+    <div class="field"><label for="report_title">Report title</label><input type="text" id="report_title" name="report_title" value="{{ cfg.report_title }}" maxlength="120" placeholder="TERMLY REPORT"></div>
+    <div class="row">
+      <div class="field"><label for="head_name">Name of the head</label><input type="text" id="head_name" name="head_name" value="{{ cfg.head_name }}" maxlength="120"></div>
+      <div class="field"><label for="head_title">Title</label><input type="text" id="head_title" name="head_title" value="{{ cfg.head_title }}" maxlength="120" placeholder="Headmaster"></div>
+    </div>
+    <p class="hint" style="margin-top:12px">The name of each term is printed after “ACADEMIC YEAR:”, so name your terms like <b>2025-2026 TERM 1</b> (School Settings → Academic years).</p>
+    <label style="font-weight:400"><input type="checkbox" name="report_detail" value="1" {{ 'checked' if cfg.detail }}> Also show the <b>Test</b> and <b>Exam</b> parts of every subject on the report (otherwise only Max and Marks, like your current report)</label>
+  </div>
+</div>
+<div class="card" id="numbers">
+  <h2>The school in numbers (dashboard)</h2>
+  <p class="hint">The dashboard counts the students, the staff and the classes by itself. The number of classrooms is not recorded anywhere in the system, so type it here.</p>
+  <div class="field" style="max-width:260px"><label for="school_classrooms">Classrooms</label><input type="number" id="school_classrooms" name="school_classrooms" min="0" max="999999" step="1" value="{{ cfg.school_classrooms }}" placeholder="for example 17"></div>
+</div>
+<div class="card" id="access">
+  <h2>Who can see the marks</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Who</th><th>What they can open</th></tr></thead>
+    <tbody>
+      <tr><td class="strong nowrap">Administrator</td><td>Everything: all classes, all students, all marks, all reports, staff and settings.</td></tr>
+      <tr><td class="strong nowrap">Subject teacher</td><td>Only the subjects you gave them, in the classes you gave them: the students of that class and <b>their own</b> marks. No teacher can see or change the marks of another teacher.</td></tr>
+      <tr><td class="strong nowrap">Class teacher</td><td>The students of their own class (add, correct, delete) and their conduct and remarks. Plus their own subjects, like every teacher.{% if cfg.class_teacher_results == '1' %} <b>You have also allowed them to see the results of their own class and print its report cards.</b>{% endif %}</td></tr>
+    </tbody>
+  </table></div>
+  <p style="margin:12px 0 0"><label style="font-weight:400"><input type="checkbox" name="class_teacher_results" value="1" {{ 'checked' if cfg.class_teacher_results == '1' }}> Allow a class teacher to <b>see</b> the results of their own class (all subjects, totals and positions) and print its marksheet and report cards. They still cannot change another teacher's marks. Leave this off to keep every teacher's marks private; then only the administrator generates the reports.</label></p>
+</div>
+<div class="card">
+  <h2>How marks are calculated</h2>
+  <div class="row">
+    <div class="field"><label for="test_weight">Tests count for (%)</label><input type="number" id="test_weight" name="test_weight" min="0" max="100" step="any" value="{{ cfg.test_weight }}" required></div>
+    <div class="field"><label for="exam_weight">Exam counts for (%)</label><input type="text" id="exam_weight" value="{{ '%g'|format(cfg.exam_weight_num) }}" disabled></div>
+    <div class="field"><label for="conduct_max">Conduct is out of</label><input type="number" id="conduct_max" name="conduct_max" min="0" max="1000" step="any" value="{{ cfg.conduct_max }}" required></div>
+    <div class="field"><label for="pass_mark">Pass mark (%)</label><input type="number" id="pass_mark" name="pass_mark" min="0" max="100" step="any" value="{{ cfg.pass_mark }}" required></div>
+  </div>
+  <p class="hint" style="margin:12px 0 0">A subject&#39;s mark = (Tests % × tests weight + Exam % × exam weight) of that subject&#39;s maximum. Example with Mathematics out of 60: tests 80 %, exam 90 %, weights 40/60 → 86 % of 60 = <b>51.6</b>.
+    TOTAL = all subject marks added; PERCENTAGE = total ÷ the maximums added; POSITION by percentage. Conduct is printed but not added to the total.
+    For a report from tests only (no exam yet), set “Tests count for” to 100. Maximums of subjects are set under <a href="{{ url_for('admin_subjects') }}">Levels &amp; subjects</a>.</p>
+</div>
+<button class="btn" type="submit">Save settings</button>
+</form>
+
+<div class="card" id="email" style="margin-top:22px">
+  <h2>Email to staff</h2>
+  <p class="hint" style="margin-top:0">When this is switched on, the system emails a staff member when their registration is received and approved, when an account is created for them, when their role changes, when they are given a subject or made class teacher, and when their password is reset. Administrators are emailed when someone registers. An email never contains a password.</p>
+  <form method="post" action="{{ url_for('admin_settings_email') }}" autocomplete="off">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <p><label style="font-weight:400"><input type="checkbox" name="mail_enabled" value="1" {{ 'checked' if mail.mail_enabled == '1' }}> <b>Send emails</b></label> {% if mail.on %}<span class="tag ok">on</span>{% else %}<span class="tag off">off</span>{% endif %}</p>
+    <div class="row">
+      <div class="field"><label for="mail_host">Mail server (SMTP)</label><input type="text" id="mail_host" name="mail_host" value="{{ mail.mail_host }}" placeholder="smtp.gmail.com" maxlength="120"></div>
+      <div class="field narrow"><label for="mail_port">Port</label><input type="text" id="mail_port" name="mail_port" value="{{ mail.mail_port }}" placeholder="587" inputmode="numeric"></div>
+      <div class="field narrow" style="flex-basis:150px"><label for="mail_security">Security</label><select id="mail_security" name="mail_security">
+        <option value="starttls" {{ 'selected' if mail.mail_security in ('', 'starttls') }}>STARTTLS (587)</option><option value="ssl" {{ 'selected' if mail.mail_security == 'ssl' }}>SSL (465)</option><option value="none" {{ 'selected' if mail.mail_security == 'none' }}>none</option></select></div>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <div class="field"><label for="mail_user">Email account that sends (username)</label><input type="text" id="mail_user" name="mail_user" value="{{ mail.mail_user }}" placeholder="school@gmail.com" maxlength="120" autocomplete="off"></div>
+      <div class="field"><label for="mail_password">Its password{% if mail.has_password %} (saved – leave empty to keep it){% endif %}</label><input type="password" id="mail_password" name="mail_password" autocomplete="new-password" placeholder="{{ '••••••••' if mail.has_password else 'app password' }}"></div>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <div class="field"><label for="mail_from">“From” address (empty = same as the account)</label><input type="text" id="mail_from" name="mail_from" value="{{ mail.mail_from }}" maxlength="120"></div>
+      <div class="field"><label for="site_url">Address of this system, to put in the emails</label><input type="text" id="site_url" name="site_url" value="{{ mail.site_url }}" placeholder="{{ guess_url }}" maxlength="120"></div>
+    </div>
+    <p class="hint" style="margin-top:10px"><b>Gmail:</b> server smtp.gmail.com, port 587, STARTTLS, the Gmail address as username, and an <b>App password</b> (Google account → Security → 2-Step Verification → App passwords), not the normal Gmail password. This computer needs internet to send. The password is kept in the database on this computer so that the system can log in to the mail server; use an app password made only for this.</p>
+    <p style="margin:0"><button class="btn" type="submit">Save email settings</button></p>
+  </form>
+  <form method="post" action="{{ url_for('admin_settings_email') }}" class="row" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line-2)">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="action" value="test">
+    <div class="field"><label for="test_to">Send a test email to</label><input type="text" id="test_to" name="to" value="{{ user.email }}" placeholder="you@gmail.com"></div>
+    <button class="btn ghost" type="submit">Send a test email</button>
+  </form>
+</div>
+
+<div class="card" id="database" style="margin-top:22px">
+  <h2>Database</h2>
+  <p>All the school's data is saved permanently in one database file on this computer:</p>
+  <p><code style="background:#f1efe9;padding:4px 8px;border-radius:4px;word-break:break-all">{{ dbinfo.path }}</code></p>
+  <div class="stats" style="margin:12px 0">
+    <div class="stat"><b>{{ dbinfo.students }}</b><span>students</span></div>
+    <div class="stat"><b>{{ dbinfo.marks }}</b><span>marks</span></div>
+    <div class="stat"><b>{{ dbinfo.classes }}</b><span>classes</span></div>
+    <div class="stat"><b>{{ dbinfo.staff }}</b><span>accounts</span></div>
+    <div class="stat"><b>{{ dbinfo.size_kb }} KB</b><span>file size</span></div>
+  </div>
+  <p class="hint">The database is outside the program folder, so installing a newer version of the program does not touch it. Passwords in it are stored only as one-way hashes.
+    {% if dbinfo.last_backup %}An automatic copy is made once a day: {{ dbinfo.backups }} cop{{ 'y' if dbinfo.backups == 1 else 'ies' }} in the folder <code>backups</code>, the newest is {{ dbinfo.last_backup }}.{% else %}An automatic copy is made once a day in the folder <code>backups</code>.{% endif %}</p>
+  <p><a class="btn" href="{{ url_for('admin_backup') }}">Download a backup now</a> <span class="small muted">Keep it on a USB stick or in the cloud, in case this computer breaks.</span></p>
+
+  <details style="border-top:1px solid var(--line-2);padding-top:12px;margin-top:14px"><summary>Restore a backup, or bring in the database of an older copy of this program</summary>
+    <form method="post" action="{{ url_for('admin_restore') }}" enctype="multipart/form-data" style="margin-top:12px" onsubmit="return confirm('Replace ALL the present data by the file you chose? The present data is kept in the backups folder first.')">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="field"><label for="restore_file">Database file (school.db, or a backup downloaded here)</label><input type="file" id="restore_file" name="file" accept=".db" required></div>
+      <p><label style="font-weight:400"><input type="checkbox" name="confirm" value="yes" required> I understand that everything now in the system (students, marks, accounts) is replaced by what is in this file</label></p>
+      <button class="btn danger" type="submit">Restore this file</button>
+    </form>
+    <p class="hint" style="margin:10px 0 0">The present data is saved in the backups folder first, so nothing is lost. After restoring, everyone logs in again with the accounts that are in the restored file. An older database is brought up to date automatically.</p>
+  </details>
+</div>
+{% endblock %}
+{% block scripts %}<script>
+document.getElementById('test_weight').addEventListener('input', function () {
+  var v = parseFloat(this.value); document.getElementById('exam_weight').value = (v >= 0 && v <= 100) ? (100 - v) : '';
+});
+</script>{% endblock %}

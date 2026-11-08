@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Import student lists{% endblock %}
+{% block content %}
+<div class="head"><div><div class="crumb"><a href="{{ url_for('admin_classes') }}">Classes</a> ›</div><h1>Import student lists from Excel</h1>
+  <div class="muted">Upload the school's student list workbook. Every sheet becomes a class with its students. You see exactly what will happen before anything is saved.</div></div></div>
+
+{% if not plan %}
+<div class="grid2">
+  <div class="card">
+    <h2>Choose the Excel file</h2>
+    <form method="post" enctype="multipart/form-data">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="field"><label for="file">Student lists (.xlsx)</label><input type="file" id="file" name="file" accept=".xlsx,.xlsm" required></div>
+      <button class="btn" type="submit">Read the file</button>
+    </form>
+  </div>
+  <div class="card">
+    <h2>What the file must look like</h2>
+    <p class="hint" style="margin-top:0">The “STUDENT LIST” workbook from SDMS works as it is: one sheet per class, with the lines <b>Grade:</b>, <b>Combination:</b> and <b>Class:</b> at the top, then a table with the columns <b>#</b>, <b>Student Code</b> and <b>Names</b>.</p>
+    <p class="hint">The student code becomes the registration number printed on the report. The combination decides the level (subject list) of the class.</p>
+    <p class="hint" style="margin-bottom:0">You can import the same file again later, or a newer one: students who are already in the system are not added twice.</p>
+  </div>
+</div>
+{% else %}
+{% set t = plan.totals %}
+<div class="stats">
+  <div class="stat"><b>{{ t.classes }}</b><span>classes in the file ({{ t.new_classes }} new)</span></div>
+  <div class="stat"><b>{{ t.students }}</b><span>students in the file</span></div>
+  <div class="stat"><b>{{ t.new }}</b><span>will be added</span></div>
+  <div class="stat"><b>{{ t.same }}</b><span>already in their class</span></div>
+  {% if t.moved %}<div class="stat"><b>{{ t.moved }}</b><span>are in another class now</span></div>{% endif %}
+</div>
+<p class="muted">File: {{ filename }}{% if plan.school %} · School: {{ plan.school }}{% endif %}{% if plan.year %} · Academic year: {{ plan.year }}{% endif %}</p>
+
+{% if plan.problems %}
+<div class="notice"><b>{{ plan.problems|length }} thing(s) in the file need your attention:</b>
+  <ul style="margin:6px 0 0;padding-left:20px">{% for p in plan.problems[:30] %}<li>{{ p }}</li>{% endfor %}{% if plan.problems|length > 30 %}<li>… and {{ plan.problems|length - 30 }} more</li>{% endif %}</ul></div>
+{% endif %}
+
+<div class="card flush">
+  <h2>Classes in the file</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Class</th><th>Grade</th><th>Combination</th><th>Level (subject list)</th><th class="n">In file</th><th class="n">Add</th><th class="n">Already there</th><th class="n">Move here</th></tr></thead>
+    <tbody>
+    {% for c in plan.classes %}
+      <tr><td class="strong nowrap">{{ c.name }} {% if not c.class_id %}<span class="tag ok">new class</span>{% endif %}</td>
+        <td class="nowrap">{{ c.grade or '–' }}</td><td>{{ c.combination or '–' }}</td>
+        <td>{{ c.level }} {% if c.level_empty %}<span class="tag wait" title="This system has no subject list for this combination yet. The level is created empty; add its subjects under Levels &amp; subjects.">new – subjects to add</span>{% elif c.level_new %}<span class="tag ok">new</span>{% endif %}</td>
+        <td class="n">{{ c.students|length }}</td><td class="n strong">{{ c.new|length }}</td><td class="n">{{ c.same }}</td>
+        <td class="n">{% if c.moved %}<span title="{% for m in c.moved[:12] %}{{ m[1] }} (now in {{ m[2] }}){{ '; ' if not loop.last }}{% endfor %}">{{ c.moved|length }}</span>{% else %}0{% endif %}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+</div>
+
+<form method="post" action="{{ url_for('admin_import_confirm') }}" class="card">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="token" value="{{ token }}">
+  <h2>Import</h2>
+  {% if t.moved %}
+  <p><label style="font-weight:400"><input type="checkbox" name="move" value="1" checked> Move the <b>{{ t.moved }}</b> students who are in a different class in this file to their new class</label></p>
+  <p class="hint">A moved student leaves the old class list. Their old marks stay stored but are no longer shown with the old class, so print last year&#39;s reports before you move students up.</p>
+  {% endif %}
+  {% if t.renamed %}<p><label style="font-weight:400"><input type="checkbox" name="rename" value="1" checked> Correct the names of <b>{{ t.renamed }}</b> students to the spelling in this file</label></p>{% endif %}
+  {% if plan.year and not year_exists %}<p><label style="font-weight:400"><input type="checkbox" name="add_year" value="1" checked> Also add the academic year <b>{{ plan.year }}</b> with its three terms (it is not in the system yet)</label></p>{% endif %}
+  {% if t.new_levels %}<p class="hint">New levels: {{ t.new_levels|join(', ') }}.</p>{% endif %}
+  <p class="hint">No student, class or mark is ever deleted by an import. Students who are in the system but not in this file stay where they are.</p>
+  <p style="margin:0"><button class="btn" type="submit">Import {{ t.new }} student{{ '' if t.new == 1 else 's' }}{% if t.new_classes %} and {{ t.new_classes }} class{{ '' if t.new_classes == 1 else 'es' }}{% endif %}</button>
+    <a class="btn ghost" href="{{ url_for('admin_import') }}">Cancel</a></p>
+</form>
+{% endif %}
+{% endblock %}

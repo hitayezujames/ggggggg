@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}First-time setup{% endblock %}
+{% block auth %}
+<h2>First-time setup</h2>
+<p class="hint">Create the administrator account. This is done only once.</p>
+<form method="post" autocomplete="off">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <div class="field"><label for="school_name">School name</label><input type="text" id="school_name" name="school_name" value="{{ form.school_name or school_name }}" required></div>
+  <div class="field"><label for="full_name">Your full name</label><input type="text" id="full_name" name="full_name" value="{{ form.full_name }}" required></div>
+  <div class="field"><label for="username">Admin username</label><input type="text" id="username" name="username" value="{{ form.username }}" maxlength="60" required>
+    <div class="hint">You log in with this. It can be a name or an email address.</div></div>
+  <div class="field"><label for="password">Password (8 characters or more)</label><input type="password" id="password" name="password" required minlength="8"></div>
+  <div class="field"><label for="confirm">Repeat password</label><input type="password" id="confirm" name="confirm" required></div>
+  <button class="btn" type="submit">Create admin account</button>
+</form>
+{% endblock %}

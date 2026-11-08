@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Staff{% endblock %}
+{% macro act(t, action, label, cls='ghost', confirm='') %}
+<form class="inline" method="post" action="{{ url_for('admin_teacher_action', uid=t.id, action=action) }}" {% if confirm %}onsubmit="return confirm('{{ confirm }}')"{% endif %}>
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn sm {{ cls }}">{{ label }}</button></form>
+{% endmacro %}
+{% block content %}
+<div class="head"><div><h1>Staff</h1><div class="muted">New staff register once on the log-in page with their email and phone number. You check those, approve the account and choose the role. You can also add staff yourself below. Everyone needs their own username and password every time they open the system.</div></div></div>
+<div class="card flush">
+  <div class="scroll"><table>
+    <thead><tr><th>Name and contact</th><th>Username</th><th>Role and status</th><th>Class teacher of</th><th class="n">Subjects</th><th></th></tr></thead>
+    <tbody>
+    {% for t in teachers %}
+      <tr>
+        <td><span class="strong nowrap">{{ t.full_name }}</span>{% if t.id == user.id %} <span class="tag off">you</span>{% endif %}
+          <div class="small muted">{% if t.email %}{{ t.email }}{% else %}no email{% endif %} · {% if t.phone %}{{ t.phone }}{% else %}no phone{% endif %}</div></td>
+        <td class="muted">{{ t.username }}</td>
+        <td>{% if t.status != 'pending' %}<span class="tag {{ 'ok' if t.role == 'admin' else 'off' }}">{{ roles[t.role] }}</span> {% endif %}{% if t.status == 'active' %}<span class="tag ok">active</span>{% if t.must_change %} <span class="tag wait" title="Has not chosen an own password yet">new password pending</span>{% endif %}{% elif t.status == 'pending' %}<span class="tag wait">waiting for approval</span>{% else %}<span class="tag off">disabled</span>{% endif %}</td>
+        <td>{{ t.class_of or '–' }}</td><td class="n">{{ t.n_subjects }}</td>
+        <td class="acts">
+          {% set del_msg = 'DELETE this account for good? The marks they entered are kept, but their subjects and class will have no teacher until you choose a new one.' %}
+          {% if t.id == user.id %}<a class="btn sm ghost" href="{{ url_for('account') }}">My account</a>
+          {% elif t.status == 'pending' %}
+            <form class="inline" method="post" action="{{ url_for('admin_teacher_action', uid=t.id, action='approve') }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <select name="role" aria-label="Role for {{ t.full_name }}" style="width:auto;padding:4px 6px">{% for key, title in roles.items() %}<option value="{{ key }}">{{ title }}</option>{% endfor %}</select>
+              <button class="btn sm">Approve</button></form>
+            {{ act(t, 'reject', 'Reject', 'danger', 'Reject and remove this registration?') }}
+          {% elif t.role == 'admin' %}<a class="btn sm ghost" href="{{ url_for('admin_teacher_edit', uid=t.id) }}">Edit / role</a>
+          {% elif t.status == 'active' %}<a class="btn sm ghost" href="{{ url_for('admin_teacher_edit', uid=t.id) }}">Edit / subjects</a> {{ act(t, 'reset', 'Reset password', 'ghost', 'Give this person a new temporary password?') }} {{ act(t, 'disable', 'Disable', 'ghost', 'Stop this person from logging in? You can enable them again later.') }} {{ act(t, 'delete', 'Delete', 'danger', del_msg) }}
+          {% else %}<a class="btn sm ghost" href="{{ url_for('admin_teacher_edit', uid=t.id) }}">Edit</a> {{ act(t, 'enable', 'Enable') }} {{ act(t, 'delete', 'Delete', 'danger', del_msg) }}{% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+</div>
+<div class="card" id="add">
+  <h2>Add a staff member</h2>
+  <form method="post" autocomplete="off">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="row">
+      <div class="field"><label for="full_name">Full name</label><input type="text" id="full_name" name="full_name" value="{{ form.full_name }}" required></div>
+      <div class="field"><label for="email">Email address</label><input type="email" id="email" name="email" value="{{ form.email }}" maxlength="120" required placeholder="name@gmail.com"></div>
+      <div class="field"><label for="phone">Phone number</label><input type="tel" id="phone" name="phone" value="{{ form.phone }}" maxlength="24" required placeholder="0788123456"></div>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <div class="field"><label for="username">Username</label><input type="text" id="username" name="username" value="{{ form.username }}" maxlength="60" required placeholder="j.mokoena or an email" autocomplete="off"></div>
+      <div class="field"><label for="password">Password (8 characters or more)</label><input type="text" id="password" name="password" required minlength="8" autocomplete="off"></div>
+      <div class="field narrow" style="flex-basis:160px"><label for="role">Role</label><select id="role" name="role">{% for key, title in roles.items() %}<option value="{{ key }}" {{ 'selected' if key == form.role }}>{{ title }}</option>{% endfor %}</select></div>
+      <button class="btn" type="submit">Add staff member</button>
+    </div>
+  </form>
+  <p class="hint" style="margin:10px 0 0">The account works immediately. Give the staff member the username and password; at their first log-in the system makes them choose their own password.</p>
+  <p class="hint" style="margin:6px 0 0"><b>Roles.</b> A <b>Teacher</b> enters marks for the subjects you give them, and manages a class if you make them its class teacher (do both under “Edit / subjects”). An <b>Administrator</b> can do everything you can, including managing staff. <b>Disable</b> stops a log-in but keeps the account; <b>Delete</b> removes it for good (marks they entered are always kept).</p>
+</div>
+{% endblock %}

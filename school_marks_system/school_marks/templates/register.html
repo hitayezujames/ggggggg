@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Register as staff{% endblock %}
+{% block auth %}
+<h2>Register as staff</h2>
+<p class="hint">New staff register here once. The admin checks your details, approves the account and gives you your role. From then on you log in with your username and password every time.</p>
+<form method="post" autocomplete="off">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <div class="field"><label for="full_name">Full name</label><input type="text" id="full_name" name="full_name" value="{{ form.full_name }}" required></div>
+  <div class="field"><label for="email">Email address</label><input type="email" id="email" name="email" value="{{ form.email }}" maxlength="120" required placeholder="name@gmail.com"></div>
+  <div class="field"><label for="phone">Phone number</label><input type="tel" id="phone" name="phone" value="{{ form.phone }}" maxlength="24" required placeholder="0788123456" pattern="[+]?[0-9 ()\-.]{9,24}" title="Digits only, for example 0788123456 or +250788123456">
+    <div class="hint">The admin uses your email and phone number to confirm it is really you.</div></div>
+  <div class="field"><label for="username">Username</label><input type="text" id="username" name="username" value="{{ form.username }}" maxlength="60" required>
+    <div class="hint">A short name such as j.mokoena, or your email address.</div></div>
+  <div class="field"><label for="password">Password (8 characters or more)</label><input type="password" id="password" name="password" required minlength="8"></div>
+  <div class="field"><label for="confirm">Repeat password</label><input type="password" id="confirm" name="confirm" required></div>
+  <button class="btn" type="submit">Register</button>
+</form>
+<p class="alt">Already have an account? <a href="{{ url_for('login') }}">Log in</a></p>
+{% endblock %}

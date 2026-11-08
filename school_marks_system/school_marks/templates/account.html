@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}My account{% endblock %}
+{% block content %}
+<div class="head"><div><h1>My account</h1><div class="muted">{{ user.full_name }} · username <b>{{ user.username }}</b></div></div></div>
+{% if user.must_change %}<div class="notice"><b>Welcome.</b> Before you continue, choose your own password. First type the password the admin gave you, then your new one. Nobody else will know it.</div>{% endif %}
+<div class="card" style="max-width:460px">
+  <h2>{{ 'Choose your own password' if user.must_change else 'Change password' }}</h2>
+  <form method="post" autocomplete="off">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="field"><label for="current_password">{{ 'Password the admin gave you' if user.must_change else 'Current password' }}</label><input type="password" id="current_password" name="current_password" required></div>
+    <div class="field"><label for="new_password">New password (8 characters or more)</label><input type="password" id="new_password" name="new_password" required minlength="8"></div>
+    <div class="field"><label for="confirm">Repeat new password</label><input type="password" id="confirm" name="confirm" required></div>
+    <button class="btn" type="submit">Change password</button>
+  </form>
+</div>
+{% if user.role == 'admin' %}
+<div class="card" style="max-width:460px">
+  <h2>Change admin username</h2>
+  <form method="post" action="{{ url_for('account_username') }}" autocomplete="off">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="field"><label for="username">Username (a name or an email address)</label><input type="text" id="username" name="username" value="{{ user.username }}" maxlength="60" required autocomplete="off"></div>
+    <div class="field"><label for="u_password">Your password (to confirm it is you)</label><input type="password" id="u_password" name="current_password" required></div>
+    <button class="btn ghost" type="submit">Change username</button>
+  </form>
+</div>
+{% endif %}
+{% endblock %}

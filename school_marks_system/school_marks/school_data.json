@@ -1,0 +1,4543 @@
+{
+"source": "GS St Joseph - Student Lists 2026-2027.xlsx",
+"year": "2026-2027",
+"terms": [
+"2026-2027 TERM 1",
+"2026-2027 TERM 2",
+"2026-2027 TERM 3"
+],
+"classes": [
+{
+"name": "S1A",
+"level": "S1, S2, S3",
+"grade": "SENIOR 1",
+"combination": "ORDINARY LEVEL"
+},
+{
+"name": "S2A",
+"level": "S1, S2, S3",
+"grade": "SENIOR 2",
+"combination": "ORDINARY LEVEL"
+},
+{
+"name": "S2B",
+"level": "S1, S2, S3",
+"grade": "SENIOR 2",
+"combination": "ORDINARY LEVEL"
+},
+{
+"name": "S2C",
+"level": "S1, S2, S3",
+"grade": "SENIOR 2",
+"combination": "ORDINARY LEVEL"
+},
+{
+"name": "S3A",
+"level": "S1, S2, S3",
+"grade": "SENIOR 3",
+"combination": "ORDINARY LEVEL"
+},
+{
+"name": "S3B",
+"level": "S1, S2, S3",
+"grade": "SENIOR 3",
+"combination": "ORDINARY LEVEL"
+},
+{
+"name": "S3C",
+"level": "S1, S2, S3",
+"grade": "SENIOR 3",
+"combination": "ORDINARY LEVEL"
+},
+{
+"name": "S4MS1A",
+"level": "S4, S5 - Math and Science Stream One",
+"grade": "SENIOR 4",
+"combination": "Math and Science Stream One"
+},
+{
+"name": "S4MS2A",
+"level": "S4, S5 - Math and Science Stream Two",
+"grade": "SENIOR 4",
+"combination": "Math and Science Stream Two"
+},
+{
+"name": "S5MS1A",
+"level": "S4, S5 - Math and Science Stream One",
+"grade": "SENIOR 5",
+"combination": "Math and Science Stream One"
+},
+{
+"name": "S5MS1B",
+"level": "S4, S5 - Math and Science Stream One",
+"grade": "SENIOR 5",
+"combination": "Math and Science Stream One"
+},
+{
+"name": "S5MS1C",
+"level": "S4, S5 - Math and Science Stream One",
+"grade": "SENIOR 5",
+"combination": "Math and Science Stream One"
+},
+{
+"name": "S5MS2A",
+"level": "S4, S5 - Math and Science Stream Two",
+"grade": "SENIOR 5",
+"combination": "Math and Science Stream Two"
+},
+{
+"name": "S6MCBA",
+"level": "S6 - MCB",
+"grade": "SENIOR 6",
+"combination": "Mathematics-Chemistry-Biology"
+},
+{
+"name": "S6MEGA",
+"level": "S6 - MEG",
+"grade": "SENIOR 6",
+"combination": "Mathematics-Economics-Geography"
+},
+{
+"name": "S6PCBA",
+"level": "S6 - PCB",
+"grade": "SENIOR 6",
+"combination": "Physics-Chemistry-Biology"
+},
+{
+"name": "S6PCMA",
+"level": "S6 - PCM",
+"grade": "SENIOR 6",
+"combination": "Physics-Chemistry-Mathematics"
+}
+],
+"students": [
+[
+"S1A",
+"271111190004",
+"AKINEZA KIRENGA Bella Christella",
+""
+],
+[
+"S1A",
+"511008230095",
+"BERABOSE HONNETTE",
+""
+],
+[
+"S1A",
+"120912170315",
+"CYIZA UWIMANA DORAH",
+""
+],
+[
+"S1A",
+"270815211060",
+"DUSHIMIYIMANA RAHAB",
+""
+],
+[
+"S1A",
+"281104250069",
+"GIRAMATA Chance",
+""
+],
+[
+"S1A",
+"361012180004",
+"Havugimana Mpano Samuella",
+""
+],
+[
+"S1A",
+"280602182608",
+"INEZA TETA Pascaline",
+""
+],
+[
+"S1A",
+"421715260037",
+"INEZAYAYO NISHIMWE LIDIVINE",
+""
+],
+[
+"S1A",
+"110908170817",
+"INGABE CYUBAHIRO MEORA",
+""
+],
+[
+"S1A",
+"130812170759",
+"INTWAZA MUSAFIRI IANNA",
+""
+],
+[
+"S1A",
+"350705220541",
+"IRAKIZA TANTINE",
+""
+],
+[
+"S1A",
+"121213210276",
+"Irakoze Jovia",
+""
+],
+[
+"S1A",
+"270811270002",
+"IRAKOZE Ornella",
+""
+],
+[
+"S1A",
+"310231250085",
+"IRAKOZE PEACE MICHAELLA",
+""
+],
+[
+"S1A",
+"281224260156",
+"IRAKOZE PRECIOUS",
+""
+],
+[
+"S1A",
+"571029230064",
+"IRASUBIZA HAPPY PROMISE",
+""
+],
+[
+"S1A",
+"260901200053",
+"IREBE RUTAGENGWA AURORE",
+""
+],
+[
+"S1A",
+"120401171296",
+"IRIHO TESI Ianna Elsy",
+""
+],
+[
+"S1A",
+"271210210245",
+"ISHIMWE DEBORAH",
+""
+],
+[
+"S1A",
+"281010250161",
+"ISIMBI UMUHOZA Sylvie",
+""
+],
+[
+"S1A",
+"271202200244",
+"ISONGA SANGWA Aurore",
+""
+],
+[
+"S1A",
+"121014200143",
+"IYAMUREMYE ANISU",
+""
+],
+[
+"S1A",
+"281226260023",
+"KAMUGISHA SYLVIE ROLANDE KEYS",
+""
+],
+[
+"S1A",
+"130720200010",
+"KAYIHURA AIMEE Erica",
+""
+],
+[
+"S1A",
+"271210190186",
+"KEZA SANDRA",
+""
+],
+[
+"S1A",
+"260927190003",
+"MIZERO NSHUTI Clement",
+""
+],
+[
+"S1A",
+"121031210282",
+"MUGABE PENUELLE",
+""
+],
+[
+"S1A",
+"260901250199",
+"MUNYANEZA EMELYNDA",
+""
+],
+[
+"S1A",
+"110512190086",
+"NIYONSHIMIRA HERVE",
+""
+],
+[
+"S1A",
+"110901230424",
+"NKURUNZIZA RUGWIRO Elsie Audrey",
+""
+],
+[
+"S1A",
+"131009210144",
+"NTAWUYIHINYUZA NIYO JOVINE",
+""
+],
+[
+"S1A",
+"340103230186",
+"NTWARI KEVIN",
+""
+],
+[
+"S1A",
+"121420250107",
+"NTWARI NALADA DELICE",
+""
+],
+[
+"S1A",
+"130721190055",
+"UMUKUNDWA HABAYO Francine",
+""
+],
+[
+"S1A",
+"110417230103",
+"UMUKUNZI Edith",
+""
+],
+[
+"S1A",
+"271210181294",
+"UMURERWA ELLA DOREEN",
+""
+],
+[
+"S1A",
+"270849180168",
+"UMUTONI INNOCENTE",
+""
+],
+[
+"S1A",
+"120230240275",
+"UMWAMIKAZI Riza Teta Malua",
+""
+],
+[
+"S1A",
+"361111210115",
+"UWASE Merveille Kessy",
+""
+],
+[
+"S1A",
+"360904210380",
+"UWIGIKUNDIRO Princesse",
+""
+],
+[
+"S2A",
+"130530230097",
+"ABIMANA JURU CHARITY",
+""
+],
+[
+"S2A",
+"120401230097",
+"AGAHOZO ELLA BERNICE",
+""
+],
+[
+"S2A",
+"281234230125",
+"ASHIMWE DIDIER ANGELO",
+""
+],
+[
+"S2A",
+"431001190599",
+"BYUKUSENGE Zainab",
+""
+],
+[
+"S2A",
+"360407250139",
+"DUSHIMIMANA JANVIER",
+""
+],
+[
+"S2A",
+"130230220057",
+"Gakiza Sharon Isla Gabino",
+""
+],
+[
+"S2A",
+"550411230053",
+"GANZA HIRWA BRYAN",
+""
+],
+[
+"S2A",
+"130719240036",
+"GANZA LUXIN Maestro",
+""
+],
+[
+"S2A",
+"570513230139",
+"GASARO Raisa",
+""
+],
+[
+"S2A",
+"110901220183",
+"INEZA KARANGWA HUGUETTE",
+""
+],
+[
+"S2A",
+"270802210296",
+"INEZA Ornella",
+""
+],
+[
+"S2A",
+"431418220336",
+"INGABIRE GISELE",
+""
+],
+[
+"S2A",
+"130208190433",
+"INGABIRE NADINE",
+""
+],
+[
+"S2A",
+"540711160022",
+"INGABIRE Samilla",
+""
+],
+[
+"S2A",
+"270107230139",
+"INGENZI Ivan Bruno",
+""
+],
+[
+"S2A",
+"560102191024",
+"IRADUKUNDA ALICE",
+""
+],
+[
+"S2A",
+"241402200191",
+"IRADUKUNDA Hertier",
+""
+],
+[
+"S2A",
+"130103240089",
+"IRADUKUNDA NZIZA FAVOR MERVEILLE",
+""
+],
+[
+"S2A",
+"120447200216",
+"IRAKOZE SHEMA CHRIS",
+""
+],
+[
+"S2A",
+"351119240038",
+"IRANZI Kellan",
+""
+],
+[
+"S2A",
+"421715230045",
+"IRASUBIZA UWASE DENISE",
+""
+],
+[
+"S2A",
+"271208160717",
+"ISHEJA AIMEE NANCY",
+""
+],
+[
+"S2A",
+"510504140025",
+"Ishimwe Happy Sabrine",
+""
+],
+[
+"S2A",
+"121022210445",
+"ISHIMWE MUHIRE Gauthier",
+""
+],
+[
+"S2A",
+"571006230041",
+"ISIMBI Bright Eunice",
+""
+],
+[
+"S2A",
+"571025250068",
+"KABALISA JONATHAN",
+""
+],
+[
+"S2A",
+"511027250002",
+"KAYUMBA TREVIN BRYAN",
+""
+],
+[
+"S2A",
+"130803210427",
+"LIZA RUTAGANDA ELLA",
+""
+],
+[
+"S2A",
+"330412210520",
+"MBABAZI RUBASHA ANETH",
+""
+],
+[
+"S2A",
+"280602200034",
+"MUCYO KAMANZI Lionel",
+""
+],
+[
+"S2A",
+"570910220091",
+"MUGISHA GANZA BRYAN",
+""
+],
+[
+"S2A",
+"260918190061",
+"MURAGIJIMANA Henriette",
+""
+],
+[
+"S2A",
+"550710200159",
+"MUTONIWACU Liliane",
+""
+],
+[
+"S2A",
+"571308170320",
+"MUVUNYI Doreen",
+""
+],
+[
+"S2A",
+"110601230355",
+"NIYONKURU TRESOR",
+""
+],
+[
+"S2A",
+"281225240115",
+"NZIZA ENZO RYAN",
+""
+],
+[
+"S2A",
+"510504160328",
+"RUGAMBA NGARAMBE NAPOLEON",
+""
+],
+[
+"S2A",
+"130110220068",
+"SANGWA IGENA Arthur",
+""
+],
+[
+"S2A",
+"571006230359",
+"SEZERANO EMMANUEL",
+""
+],
+[
+"S2A",
+"270107240371",
+"TONA MUNYARUGO Alpha",
+""
+],
+[
+"S2A",
+"430824210313",
+"TUYISENGE INEZA YAYAH",
+""
+],
+[
+"S2A",
+"260914230239",
+"UMUHOZA DIVINE",
+""
+],
+[
+"S2A",
+"571036230462",
+"UMUMARARUNGU GAKUBA Kethia",
+""
+],
+[
+"S2A",
+"130215160333",
+"UMUTONIWASE BARAKA",
+""
+],
+[
+"S2A",
+"340116240259",
+"UWASE Stella",
+""
+],
+[
+"S2A",
+"360504191103",
+"UWINEZA Clarisse",
+""
+],
+[
+"S2A",
+"250311200248",
+"UWITONZE Delphine",
+""
+],
+[
+"S2A",
+"370511230061",
+"UWIZEYIMANA Sandrine",
+""
+],
+[
+"S2B",
+"230110230162",
+"ABISHYIZEHAMWE GRACE",
+""
+],
+[
+"S2B",
+"310627240007",
+"AGASARO MUGISHA Ines Natacha",
+""
+],
+[
+"S2B",
+"271210210270",
+"AKALIZA INEZA CHRISTELLA",
+""
+],
+[
+"S2B",
+"120429160051",
+"ASHIMWE KUZWA Angelon",
+""
+],
+[
+"S2B",
+"271210160471",
+"BIBUTSUHOZE INEZA DAVIS",
+""
+],
+[
+"S2B",
+"270815184031",
+"CYUZUZO MUGISHA ARDO",
+""
+],
+[
+"S2B",
+"270901160206",
+"DUSHIME CYUZUZO ALBINE",
+""
+],
+[
+"S2B",
+"281226240183",
+"GWIRO LEINA GRENZ",
+""
+],
+[
+"S2B",
+"571032160406",
+"Habineza Fabrice",
+""
+],
+[
+"S2B",
+"571005260238",
+"HAKIZIMANA JEAN PIERRE",
+""
+],
+[
+"S2B",
+"121004240268",
+"IMANIHABWICYUBAHIRO MARIE ARLETTE",
+""
+],
+[
+"S2B",
+"270607180211",
+"INEZA HABYARIMANA BIENAIME",
+""
+],
+[
+"S2B",
+"510619190140",
+"INEZA MAPENDO Sonia",
+""
+],
+[
+"S2B",
+"110401230287",
+"INEZA NOURIYAT",
+""
+],
+[
+"S2B",
+"540406230181",
+"IRADUKUNDA SEZERANO GISELE",
+""
+],
+[
+"S2B",
+"270802160305",
+"IRADUKUNDA Winny Aurore",
+""
+],
+[
+"S2B",
+"560108240127",
+"IRADUKUNDA Yvette Monia",
+""
+],
+[
+"S2B",
+"271210160697",
+"IRAKOZE KEZA CARINE",
+""
+],
+[
+"S2B",
+"281010180006",
+"IRAKOZE MUNEZERO DIVINE",
+""
+],
+[
+"S2B",
+"570910250028",
+"IREBE KENTHA BLESSING",
+""
+],
+[
+"S2B",
+"270901160218",
+"ISHIMWE ANGE CALINE",
+""
+],
+[
+"S2B",
+"280114190086",
+"ISHIMWE Ange Chanella",
+""
+],
+[
+"S2B",
+"120431220075",
+"ISHIMWE KELIA INESS",
+""
+],
+[
+"S2B",
+"120525220211",
+"ISHIMWE NTWALI POTHIN",
+""
+],
+[
+"S2B",
+"120115200111",
+"Ishimwe Uwase Belyse",
+""
+],
+[
+"S2B",
+"110921240227",
+"KANAMUGIRE EDWIN ELIO",
+""
+],
+[
+"S2B",
+"271210160528",
+"KANYANGE GASASIRA GAELLE",
+""
+],
+[
+"S2B",
+"550410230002",
+"KEZA ABUMUTIMA LAVRINE",
+""
+],
+[
+"S2B",
+"271210160481",
+"KEZA AMANDA JOANNA",
+""
+],
+[
+"S2B",
+"271210210302",
+"KIBERINKA PROVIDENCE",
+""
+],
+[
+"S2B",
+"431016230726",
+"KIRENGA MAXIME BRADEN PRECIOUS",
+""
+],
+[
+"S2B",
+"120401161030",
+"MANZI DAVIS",
+""
+],
+[
+"S2B",
+"571013190079",
+"MUCYO THIERY",
+""
+],
+[
+"S2B",
+"270908200212",
+"MUGABO NICOLAS NELSON",
+""
+],
+[
+"S2B",
+"240916230040",
+"MUGISHA AIME PATRICK",
+""
+],
+[
+"S2B",
+"270802150001",
+"MUGISHA Gloire",
+""
+],
+[
+"S2B",
+"271210160522",
+"MUGISHA LUTFATULLAH",
+""
+],
+[
+"S2B",
+"120902160118",
+"MUHIRWA Jean Luc",
+""
+],
+[
+"S2B",
+"570514230046",
+"MUKURARINDA DEVIS",
+""
+],
+[
+"S2B",
+"120440190081",
+"MUNYEMANA CLEVER",
+""
+],
+[
+"S2B",
+"560513160310",
+"MUNYESHURI Davy Brighton",
+""
+],
+[
+"S2B",
+"250318180750",
+"MUSHIMIYIMANA Marie Goretti",
+""
+],
+[
+"S2B",
+"130537230008",
+"NDAYISHIMIYE Bertin",
+""
+],
+[
+"S2B",
+"271208250167",
+"NIZEYIMANA KEVIN",
+""
+],
+[
+"S2B",
+"411612230104",
+"NYAMPINGA JOLIE",
+""
+],
+[
+"S2B",
+"281217190157",
+"NZIZA RWEMA Brayan",
+""
+],
+[
+"S2B",
+"120903190134",
+"TETERO GISA Lionel",
+""
+],
+[
+"S2B",
+"441606180928",
+"UWIHIRWE Elizabeth",
+""
+],
+[
+"S2C",
+"570513160126",
+"GATESI EMMANUELLA",
+""
+],
+[
+"S2C",
+"270815200687",
+"GIKUNDIRO LOUANGE KETIA",
+""
+],
+[
+"S2C",
+"121004200061",
+"GIKUNDIRO SONIA",
+""
+],
+[
+"S2C",
+"520101170469",
+"HIRWA Tresor Clement",
+""
+],
+[
+"S2C",
+"271210181710",
+"IHIRWE SHAMI PRAYER",
+""
+],
+[
+"S2C",
+"210116190182",
+"IHOGOZA Anifa Jazila",
+""
+],
+[
+"S2C",
+"121304190194",
+"IHUMURE EBEN",
+""
+],
+[
+"S2C",
+"281215220045",
+"IMENA MUGIRANEZA Orna Gianni",
+""
+],
+[
+"S2C",
+"270107190437",
+"IMFURA Chris Blest",
+""
+],
+[
+"S2C",
+"571006230351",
+"INEMA Ora Adiella",
+""
+],
+[
+"S2C",
+"571006230363",
+"INEZA Aela",
+""
+],
+[
+"S2C",
+"270107240381",
+"INEZA Beni",
+""
+],
+[
+"S2C",
+"270829160130",
+"INEZA RITA CHRISTELLA",
+""
+],
+[
+"S2C",
+"281116180069",
+"INEZA SHIMWA COLOMBE",
+""
+],
+[
+"S2C",
+"330208192706",
+"IRAKOZE Gloriose",
+""
+],
+[
+"S2C",
+"271208190372",
+"IRAKOZE SANGWA ELLA",
+""
+],
+[
+"S2C",
+"270815220138",
+"IRASUBIZA GANZA TURENE",
+""
+],
+[
+"S2C",
+"270813220244",
+"ISHEJA Louange Angela Michella",
+""
+],
+[
+"S2C",
+"120457230069",
+"ISHIMWE Lucky Frank",
+""
+],
+[
+"S2C",
+"120912170235",
+"ISHIMWE Léon Frank",
+""
+],
+[
+"S2C",
+"110901220516",
+"ISHIMWE NERIAH",
+""
+],
+[
+"S2C",
+"270502190131",
+"IYADUHUJE RUBERWA Jesca",
+""
+],
+[
+"S2C",
+"110601180471",
+"KAMALI SINGIZA BRUNO",
+""
+],
+[
+"S2C",
+"360504230390",
+"KAMI MAHORO AURORE",
+""
+],
+[
+"S2C",
+"110908160602",
+"KEZA RONIA NDEGEYA",
+""
+],
+[
+"S2C",
+"271210160453",
+"KUZWA ANGELA BRUNELLA",
+""
+],
+[
+"S2C",
+"270811270001",
+"MANZI Maxence Enzo",
+""
+],
+[
+"S2C",
+"281220250081",
+"MANZI Treasure Emmanuel",
+""
+],
+[
+"S2C",
+"550501160227",
+"MPABUKA JURU GAGA ELOI",
+""
+],
+[
+"S2C",
+"120922230031",
+"MUCUNGUZI Agneau",
+""
+],
+[
+"S2C",
+"260229220081",
+"MUCUNGUZI SHALOM GIRENE",
+""
+],
+[
+"S2C",
+"130308190027",
+"MUGAMBI RWEMA Christian",
+""
+],
+[
+"S2C",
+"121023230355",
+"MUGIRANEZA FRANK",
+""
+],
+[
+"S2C",
+"120706181480",
+"MUGISHA CHRISTIAN",
+""
+],
+[
+"S2C",
+"121013180378",
+"MUGISHA DUSENGE Aimable",
+""
+],
+[
+"S2C",
+"110836200121",
+"MUSHIKIWASE KEZA Miriam",
+""
+],
+[
+"S2C",
+"511021250051",
+"MUTAKO ANGEL",
+""
+],
+[
+"S2C",
+"270849180175",
+"NAKURE TUYISENGE Huguette",
+""
+],
+[
+"S2C",
+"121132230014",
+"NGABO MUNEZA Yaniv",
+""
+],
+[
+"S2C",
+"121119190037",
+"NIYIGENA Christian",
+""
+],
+[
+"S2C",
+"120134220077",
+"REBERO Axel",
+""
+],
+[
+"S2C",
+"110809190170",
+"Rwabukwaya Nganji Armel",
+""
+],
+[
+"S2C",
+"281215230074",
+"SINGIZA Delice",
+""
+],
+[
+"S2C",
+"120425230189",
+"TUYISENGE AIME Benitha",
+""
+],
+[
+"S2C",
+"270813220250",
+"USANASE Henriette",
+""
+],
+[
+"S2C",
+"241102200456",
+"UWAYISENGA SAGE KEVINE",
+""
+],
+[
+"S2C",
+"260901180868",
+"UWEZO MUKAZI DANIELLA",
+""
+],
+[
+"S2C",
+"370526230193",
+"UWIRINGIYIMANA DATIVE",
+""
+],
+[
+"S3A",
+"350705200205",
+"ABIJURUNABAYISENGA JEAN DE LA PAIX",
+""
+],
+[
+"S3A",
+"121318230013",
+"AKIMANA ISHIMWE Ariane",
+""
+],
+[
+"S3A",
+"430605190108",
+"ATETE JOYCE",
+""
+],
+[
+"S3A",
+"570514210084",
+"BAYIGAMBA KAYUMBA REMY",
+""
+],
+[
+"S3A",
+"120903180929",
+"CYEMEZO Aime Landry",
+""
+],
+[
+"S3A",
+"130907160099",
+"FURAHA ORESTE",
+""
+],
+[
+"S3A",
+"120425200072",
+"GANZA Junior",
+""
+],
+[
+"S3A",
+"121208230053",
+"HIRWA AIME GHISLAIN",
+""
+],
+[
+"S3A",
+"571036210092",
+"IKUZORYAYO HIRWA Adolphe",
+""
+],
+[
+"S3A",
+"570514180293",
+"INEZA AMANI DANIELLA",
+""
+],
+[
+"S3A",
+"570514210081",
+"INEZA MANZI BRUNO",
+""
+],
+[
+"S3A",
+"361012210310",
+"Ineza Mervin Darcin",
+""
+],
+[
+"S3A",
+"270502160073",
+"INEZA NYAWERA NELSON",
+""
+],
+[
+"S3A",
+"210302181361",
+"IRADUKUNDA ANGE BENITHA",
+""
+],
+[
+"S3A",
+"270816182485",
+"IRADUKUNDA Kevine",
+""
+],
+[
+"S3A",
+"260223210183",
+"IRADUKUNDA Marie Merci Christella",
+""
+],
+[
+"S3A",
+"260901190244",
+"IRAKOZE KEZA CARINE",
+""
+],
+[
+"S3A",
+"521104184504",
+"IRAKOZE MUGISHA CEDRICK",
+""
+],
+[
+"S3A",
+"260709220192",
+"IRAKOZE Nadine",
+""
+],
+[
+"S3A",
+"560514190064",
+"ISHIMWE GIHOZO Liliane",
+""
+],
+[
+"S3A",
+"270813230013",
+"KAMIKAZI KEZA Cynthia",
+""
+],
+[
+"S3A",
+"570514190034",
+"KEZA Natacha",
+""
+],
+[
+"S3A",
+"131010180723",
+"MANZI DERIC",
+""
+],
+[
+"S3A",
+"270107160309",
+"MASENGESHO EMELYNE",
+""
+],
+[
+"S3A",
+"270602182230",
+"MIZERO ESTHER",
+""
+],
+[
+"S3A",
+"121427180126",
+"Mugisha David",
+""
+],
+[
+"S3A",
+"281215240009",
+"MUNKUNDIRE Atfa",
+""
+],
+[
+"S3A",
+"270829220206",
+"MUSHAYIJA NTWARI BRAIN",
+""
+],
+[
+"S3A",
+"521106160226",
+"MUTANGAMPUNDU Aimee Yvonne",
+""
+],
+[
+"S3A",
+"570514190127",
+"MUTONI Natasha",
+""
+],
+[
+"S3A",
+"571012200018",
+"MUTUME STELLA",
+""
+],
+[
+"S3A",
+"270816172015",
+"MWAMBARI Honore",
+""
+],
+[
+"S3A",
+"531005180884",
+"NDIZEYE Aldo",
+""
+],
+[
+"S3A",
+"520330190023",
+"NKANGURA Clever",
+""
+],
+[
+"S3A",
+"110815170476",
+"NSHUTI AIMEE DELILLE",
+""
+],
+[
+"S3A",
+"521322190149",
+"NTWARI Fred",
+""
+],
+[
+"S3A",
+"130803220207",
+"RUSAGARA SHEJA CHRISPIN",
+""
+],
+[
+"S3A",
+"110901190052",
+"RUTABANA SHAMI Ian",
+""
+],
+[
+"S3A",
+"351003161090",
+"RWEMA LOUIS HUBERT",
+""
+],
+[
+"S3A",
+"240917200226",
+"UMUKUNZI Noella",
+""
+],
+[
+"S3A",
+"271205182687",
+"USABYIMANA YVETTE",
+""
+],
+[
+"S3A",
+"281224210165",
+"UWERA MWIZA HOLLY ADIELLA",
+""
+],
+[
+"S3A",
+"351210170883",
+"UWINEZA Laurence",
+""
+],
+[
+"S3B",
+"570514200027",
+"ANINAHAZWE JEAN BAKHITA",
+""
+],
+[
+"S3B",
+"570514230058",
+"BERWA IGABE Gloria",
+""
+],
+[
+"S3B",
+"110601150093",
+"CYUSA MANZI BRYAN",
+""
+],
+[
+"S3B",
+"270859220005",
+"GASARO Gaju Laureen",
+""
+],
+[
+"S3B",
+"130224240046",
+"Gashugi Ganza Marvin",
+""
+],
+[
+"S3B",
+"430809230366",
+"GATARIMA INTWARI ERMES SALVO",
+""
+],
+[
+"S3B",
+"260917200154",
+"GISUBIZO Heritier",
+""
+],
+[
+"S3B",
+"270816220514",
+"HABIMANA OLIVIER",
+""
+],
+[
+"S3B",
+"550501180450",
+"HAKIZIMANA IKAZE PLACIDE",
+""
+],
+[
+"S3B",
+"351003181353",
+"IKAZE MARIZA KELIA",
+""
+],
+[
+"S3B",
+"521106160049",
+"INEMA KEZA Melissa Emelyne",
+""
+],
+[
+"S3B",
+"110921220055",
+"INEZA ESTHER",
+""
+],
+[
+"S3B",
+"510616230027",
+"INEZA Leilla Olga",
+""
+],
+[
+"S3B",
+"270859220011",
+"INGANJI D'Angello Aristeguieta",
+""
+],
+[
+"S3B",
+"281225210151",
+"IRAKORA AIME GIFT",
+""
+],
+[
+"S3B",
+"121008223225",
+"IRAKOZE MUNEZERO ROMEO",
+""
+],
+[
+"S3B",
+"270813190687",
+"IRANEZEZA Bonheur",
+""
+],
+[
+"S3B",
+"271208190262",
+"ISEZERANO MUGISHA Peace Ketty",
+""
+],
+[
+"S3B",
+"281220180143",
+"ISHAMI RUKERA ELLIOT",
+""
+],
+[
+"S3B",
+"270815230297",
+"ISHIMWE PRINCE",
+""
+],
+[
+"S3B",
+"130502210097",
+"IZABAYO Jean Chrisostome",
+""
+],
+[
+"S3B",
+"570514190075",
+"KARINIJABO Yvan",
+""
+],
+[
+"S3B",
+"571018230147",
+"MANIRAKIZA GISA LIONEL",
+""
+],
+[
+"S3B",
+"131017180694",
+"MANZI Lucky Allan",
+""
+],
+[
+"S3B",
+"571018200034",
+"MUHOZA ANGE ALDO",
+""
+],
+[
+"S3B",
+"270840200071",
+"MUKUNZI AZIZ NURDEEN",
+""
+],
+[
+"S3B",
+"420601220027",
+"MUNYAMPIRWA Aimé Pitié",
+""
+],
+[
+"S3B",
+"570514220063",
+"MUSABYIMANA KEZA CLAIRIA",
+""
+],
+[
+"S3B",
+"411612220153",
+"MWAMBUKA Brian",
+""
+],
+[
+"S3B",
+"240510190085",
+"NATETE AIMEE SAINTETE",
+""
+],
+[
+"S3B",
+"270107190427",
+"Ngabo Munyakazi Nathan",
+""
+],
+[
+"S3B",
+"570514190107",
+"NISHIMWE Samuella",
+""
+],
+[
+"S3B",
+"570514190036",
+"NIYIGABA Francois",
+""
+],
+[
+"S3B",
+"361012190091",
+"Niyomwungeri Jean Claude",
+""
+],
+[
+"S3B",
+"131012160038",
+"NYAGATARE King Happy",
+""
+],
+[
+"S3B",
+"131010180712",
+"NZIZA TETA AGAPE",
+""
+],
+[
+"S3B",
+"270859230008",
+"RUDASINGWA MFURA Chris",
+""
+],
+[
+"S3B",
+"571018230217",
+"RWIRIRIZA KELLY BERNON",
+""
+],
+[
+"S3B",
+"270107220406",
+"Sine Ineza Landrine",
+""
+],
+[
+"S3B",
+"281224210163",
+"UMUHOZA CLAUDINE",
+""
+],
+[
+"S3B",
+"510619220170",
+"UWASE IZERE Raïssa",
+""
+],
+[
+"S3B",
+"521106160229",
+"UWIMANA Rita",
+""
+],
+[
+"S3C",
+"121004210656",
+"ABAYISENGA BENEFICE",
+""
+],
+[
+"S3C",
+"130816220048",
+"AKARABO SONIA",
+""
+],
+[
+"S3C",
+"271210160252",
+"ASANANDE ISHEJA DORCEY",
+""
+],
+[
+"S3C",
+"330423190549",
+"BAHIZI BRYAN",
+""
+],
+[
+"S3C",
+"210125220090",
+"BIKORIMANA INNOCENT",
+""
+],
+[
+"S3C",
+"271210160900",
+"CYUZUZO CHRIS GIUSTINO",
+""
+],
+[
+"S3C",
+"570514230057",
+"DUSHIME CHRISTIAN",
+""
+],
+[
+"S3C",
+"120440220069",
+"GISA ARNOLD RUGAYI",
+""
+],
+[
+"S3C",
+"570514190045",
+"HATANGIMANA Olivier",
+""
+],
+[
+"S3C",
+"360910200118",
+"IBIGWI KENNY BIGSON",
+""
+],
+[
+"S3C",
+"110601180542",
+"IHIRWE Happy",
+""
+],
+[
+"S3C",
+"130404220236",
+"INEZA Dan Bright",
+""
+],
+[
+"S3C",
+"281202200224",
+"INEZA GATETE Aurore",
+""
+],
+[
+"S3C",
+"330508200178",
+"INEZA JOLIETTE",
+""
+],
+[
+"S3C",
+"361012160412",
+"Iranezeza Hirwa Leandre",
+""
+],
+[
+"S3C",
+"571018230118",
+"IRIBAGIZA MPUNDU ANGE",
+""
+],
+[
+"S3C",
+"361012160451",
+"Iriho Shimwa Friend Romeo",
+""
+],
+[
+"S3C",
+"270509170750",
+"ISHIMWE Aimee Sabrine",
+""
+],
+[
+"S3C",
+"351210170875",
+"ISHIMWE BYIRINGIRO KEVINE",
+""
+],
+[
+"S3C",
+"121312190031",
+"ISHIMWE GANZA John Kelly",
+""
+],
+[
+"S3C",
+"510504190095",
+"ISHIMWE JULES",
+""
+],
+[
+"S3C",
+"270803200169",
+"KALIZA PATIENCE MIRACLE",
+""
+],
+[
+"S3C",
+"510504160324",
+"KANANURA IMANI ISMAEL",
+""
+],
+[
+"S3C",
+"241414160442",
+"KEZA NSHUTI BRIELLA",
+""
+],
+[
+"S3C",
+"130815230052",
+"KWIZERA Serge IVAN",
+""
+],
+[
+"S3C",
+"130717181529",
+"MUCYO Loic",
+""
+],
+[
+"S3C",
+"361111230035",
+"MUCYOWASE KESSINE Albune",
+""
+],
+[
+"S3C",
+"130907190015",
+"MUGISHA Alvin Disciple",
+""
+],
+[
+"S3C",
+"121208210324",
+"MUGISHA JEAN SAUVEUR",
+""
+],
+[
+"S3C",
+"270802150009",
+"MUTABAZI Sheja Luxin",
+""
+],
+[
+"S3C",
+"521106180285",
+"NIYITANGA Deborah",
+""
+],
+[
+"S3C",
+"130713210430",
+"NSENGUMUREMYI MANZI Alcade",
+""
+],
+[
+"S3C",
+"270107220387",
+"Ntwali Ally Nadjibu",
+""
+],
+[
+"S3C",
+"121004210620",
+"RUZIBIZA ANAELLA",
+""
+],
+[
+"S3C",
+"570514230055",
+"SHEMA ALAIN MUTIJIMA",
+""
+],
+[
+"S3C",
+"260901180848",
+"TUYISHIMIRE MARY QUEEN",
+""
+],
+[
+"S3C",
+"120924210590",
+"TUYIZERE Promesse Irvine",
+""
+],
+[
+"S3C",
+"220504230256",
+"UMURERWA Melissa",
+""
+],
+[
+"S3C",
+"441706220003",
+"UWACU ANNE MIRACLE",
+""
+],
+[
+"S3C",
+"571006200471",
+"UWIHOREYE ASHIMWE PHOIBE",
+""
+],
+[
+"S3C",
+"571037210129",
+"Uwiringirwa Kelsie",
+""
+],
+[
+"S3C",
+"120525230191",
+"UWISHEJA ANELKA",
+""
+],
+[
+"S4MS1A",
+"121008213204",
+"AGASARO KETIA",
+""
+],
+[
+"S4MS1A",
+"270829220140",
+"AKARIZA ISHEJA WINNY",
+""
+],
+[
+"S4MS1A",
+"260912172132",
+"AKIMANA YVETTE",
+""
+],
+[
+"S4MS1A",
+"310110172100",
+"BAHIZI IRAKOZE ROBERT",
+""
+],
+[
+"S4MS1A",
+"210113160038",
+"BARAKA ATETE HONORINE",
+""
+],
+[
+"S4MS1A",
+"270857210529",
+"CYUZUZO GATOYA",
+""
+],
+[
+"S4MS1A",
+"120409190172",
+"Dushimimana Beryle Isaro",
+""
+],
+[
+"S4MS1A",
+"271208190296",
+"GISUBIZO Elizabeth Landrine",
+""
+],
+[
+"S4MS1A",
+"281009200119",
+"IGIRIMBABAZI MARIE JOLINE",
+""
+],
+[
+"S4MS1A",
+"371412190235",
+"IHABWIKUZO SABATO Ange",
+""
+],
+[
+"S4MS1A",
+"351209160352",
+"IMANISHIMWE Promesse",
+""
+],
+[
+"S4MS1A",
+"270507160152",
+"Indabozamariya Henriette",
+""
+],
+[
+"S4MS1A",
+"281202190671",
+"IRADUKUNDA THIERRY",
+""
+],
+[
+"S4MS1A",
+"510618230032",
+"ISHIMWE ALINE",
+""
+],
+[
+"S4MS1A",
+"371521230314",
+"ISIMBI ANGE ADELICE",
+""
+],
+[
+"S4MS1A",
+"270840190077",
+"KAYIRANGA KESSIA",
+""
+],
+[
+"S4MS1A",
+"451305212040",
+"KAZE TETA DANIELLA",
+""
+],
+[
+"S4MS1A",
+"270815163104",
+"MUKUNZI IRAKOZE ALPHONSE MARIE",
+""
+],
+[
+"S4MS1A",
+"270607220048",
+"MUMPOREZE Sandrine",
+""
+],
+[
+"S4MS1A",
+"451404180327",
+"NARISANZE Patrick",
+""
+],
+[
+"S4MS1A",
+"270504190173",
+"NISHIMWE Sandrine",
+""
+],
+[
+"S4MS1A",
+"280104182023",
+"NIYONKURU Benie Deborah",
+""
+],
+[
+"S4MS1A",
+"270507160179",
+"Niyonkuru Yvonne",
+""
+],
+[
+"S4MS1A",
+"260411173978",
+"TURAHIRWA Placide",
+""
+],
+[
+"S4MS1A",
+"280602200313",
+"UMWALI SANGWA Ava Peace",
+""
+],
+[
+"S4MS1A",
+"430506181126",
+"UWIMPUHWE ANTOINETTE",
+""
+],
+[
+"S4MS2A",
+"130202220088",
+"AGASARO REBECCA ROLANDE",
+""
+],
+[
+"S4MS2A",
+"561404173033",
+"AMIZERO Kikurire Plaxede",
+""
+],
+[
+"S4MS2A",
+"121022200161",
+"BANINEMA Thecla",
+""
+],
+[
+"S4MS2A",
+"510516200211",
+"BARIZERA Alcene",
+""
+],
+[
+"S4MS2A",
+"210127160227",
+"CHANCE FRANK KENNY",
+""
+],
+[
+"S4MS2A",
+"530716190111",
+"CYUSA Frank",
+""
+],
+[
+"S4MS2A",
+"111003160123",
+"CYUSA IVAN",
+""
+],
+[
+"S4MS2A",
+"451710210547",
+"CYUSA MULISA FRANCIS",
+""
+],
+[
+"S4MS2A",
+"571032160268",
+"Dufiteyezu Evelyne",
+""
+],
+[
+"S4MS2A",
+"130811190092",
+"IMFURAYACU SIMPLICE GIFT",
+""
+],
+[
+"S4MS2A",
+"340112160042",
+"IRADUKUNDA Justin",
+""
+],
+[
+"S4MS2A",
+"270910200271",
+"ISHIMWE Marie Grace",
+""
+],
+[
+"S4MS2A",
+"270813230167",
+"ISINGIZWE NDASHIMYE Opportune",
+""
+],
+[
+"S4MS2A",
+"250205172774",
+"IYIZIRE ARADUKUNDA ANGE FLORENTINE",
+""
+],
+[
+"S4MS2A",
+"220606190550",
+"MBABAZI HOPE ADOLE",
+""
+],
+[
+"S4MS2A",
+"110601190483",
+"MUGISHA MOISE",
+""
+],
+[
+"S4MS2A",
+"110601230475",
+"MUKUNZI ANDERSON",
+""
+],
+[
+"S4MS2A",
+"130809160164",
+"MVUNGANYI JOHN",
+""
+],
+[
+"S4MS2A",
+"270107160273",
+"Ndagijimana Keza Aimee Carine",
+""
+],
+[
+"S4MS2A",
+"440112230137",
+"NDAYISENGA Brandon",
+""
+],
+[
+"S4MS2A",
+"130501180374",
+"NEZA IVAN",
+""
+],
+[
+"S4MS2A",
+"110601230469",
+"NIYONAGIZE ALAIN LOIC",
+""
+],
+[
+"S4MS2A",
+"430219220141",
+"NTAKIRUTIMANA Sangwa Brave",
+""
+],
+[
+"S4MS2A",
+"310902200194",
+"NTWARI. BUTERA Calvin",
+""
+],
+[
+"S4MS2A",
+"531005160220",
+"TETA INEZA NICIA",
+""
+],
+[
+"S4MS2A",
+"540108161268",
+"TUMUSHIME FABRICE",
+""
+],
+[
+"S4MS2A",
+"510611220137",
+"UMUKUNDWA KEILLA ORNELLA",
+""
+],
+[
+"S4MS2A",
+"430809230571",
+"UMWIZA TAQWA FASASIE",
+""
+],
+[
+"S4MS2A",
+"550702220599",
+"UWIMBABAZI YVONE",
+""
+],
+[
+"S4MS2A",
+"281208182453",
+"UYISENGA Laissa",
+""
+],
+[
+"S5MS1A",
+"110404190762",
+"ABAYODUSINGIZE Berthilde",
+""
+],
+[
+"S5MS1A",
+"121004200043",
+"AGAHOZO QUEEN",
+""
+],
+[
+"S5MS1A",
+"451706220172",
+"AJENEZA FRANCINE",
+""
+],
+[
+"S5MS1A",
+"450323220138",
+"AKARIZA Ayinkamiye Peace",
+""
+],
+[
+"S5MS1A",
+"230805230307",
+"BAZIRUWIHA JEAN PIERRE",
+""
+],
+[
+"S5MS1A",
+"270840170084",
+"BENIHIRWE ISARO PAMELA",
+""
+],
+[
+"S5MS1A",
+"270107160122",
+"CYIMANA IRIZA AMELIE",
+""
+],
+[
+"S5MS1A",
+"111001160275",
+"Cyusa Honore Pacifique",
+""
+],
+[
+"S5MS1A",
+"550501170506",
+"GAKUBA BENISSA",
+""
+],
+[
+"S5MS1A",
+"240919230005",
+"GANZA SHIMWA Eloi",
+""
+],
+[
+"S5MS1A",
+"120431210170",
+"GASARO RAISSA",
+""
+],
+[
+"S5MS1A",
+"110202160042",
+"GATESI SHEMA Mireille",
+""
+],
+[
+"S5MS1A",
+"570902190757",
+"HABINSHUTI Jean Claude",
+""
+],
+[
+"S5MS1A",
+"351210160186",
+"ICYIZIHIZA NSHUTI Arsene",
+""
+],
+[
+"S5MS1A",
+"120205160135",
+"IGIRANEZa Aime Belyse",
+""
+],
+[
+"S5MS1A",
+"510618160207",
+"IGIRANEZA PRENCE",
+""
+],
+[
+"S5MS1A",
+"560509180423",
+"IMENA KALISA WEI",
+""
+],
+[
+"S5MS1A",
+"260207220334",
+"INESS TETA",
+""
+],
+[
+"S5MS1A",
+"521323160106",
+"Ineza Daniella",
+""
+],
+[
+"S5MS1A",
+"241414160182",
+"IRAKOZE NSHUTI ALDO BRANDON",
+""
+],
+[
+"S5MS1A",
+"350904182861",
+"IRANZI EGIDE",
+""
+],
+[
+"S5MS1A",
+"110103160473",
+"ISHIMWE SHAMI RICHARD",
+""
+],
+[
+"S5MS1A",
+"331220190338",
+"IZERE MARIE REINE",
+""
+],
+[
+"S5MS1A",
+"110813180328",
+"IZERE SHAMI Bruno",
+""
+],
+[
+"S5MS1A",
+"270408180818",
+"IZERIMANA PIERRE CELESTIN",
+""
+],
+[
+"S5MS1A",
+"260905230010",
+"KAREMANYI SHIMO SALVIN",
+""
+],
+[
+"S5MS1A",
+"550707230176",
+"KWIZERA ALBERT",
+""
+],
+[
+"S5MS1A",
+"350206190194",
+"MANIRAGABA UYISENGA DARIA",
+""
+],
+[
+"S5MS1A",
+"270207160337",
+"MANISHIMWE EMMANUEL",
+""
+],
+[
+"S5MS1A",
+"570304160634",
+"MUGISHA Divine",
+""
+],
+[
+"S5MS1A",
+"260406161968",
+"MUKASHYAKA Ernestine",
+""
+],
+[
+"S5MS1A",
+"310211200249",
+"MUREKATETE Jeanne",
+""
+],
+[
+"S5MS1A",
+"270912160262",
+"MUSENGAMANA FRANK",
+""
+],
+[
+"S5MS1A",
+"571102190417",
+"NAMAHORO Jeannette",
+""
+],
+[
+"S5MS1A",
+"271206220251",
+"NDATIMANA MARIE JEANNE",
+""
+],
+[
+"S5MS1A",
+"450401160329",
+"NIYIZIGIHE CHRISTIAN",
+""
+],
+[
+"S5MS1A",
+"370824190224",
+"NIYODUSENGA ELIANE",
+""
+],
+[
+"S5MS1A",
+"270902230039",
+"NIYONKURU UKWISHATSE MIRIAMU",
+""
+],
+[
+"S5MS1A",
+"321307160423",
+"Niyonsenga Jeannette",
+""
+],
+[
+"S5MS1A",
+"570514200025",
+"NKURUNZIZA JOSHUA",
+""
+],
+[
+"S5MS1A",
+"120102160017",
+"Nsengiyaremye Nishimwe Bertrand",
+""
+],
+[
+"S5MS1A",
+"270826190496",
+"UMUGANWA Merveille Nikese",
+""
+],
+[
+"S5MS1A",
+"310103181200",
+"Umuhoza Yvan",
+""
+],
+[
+"S5MS1A",
+"311025190214",
+"UWASE Christian",
+""
+],
+[
+"S5MS1A",
+"120502160365",
+"UWASE Fabrice Faustin",
+""
+],
+[
+"S5MS1A",
+"280308160520",
+"UWIKUZO Sandrine",
+""
+],
+[
+"S5MS1B",
+"571018200158",
+"AGATAKO ISIMBI PALIN",
+""
+],
+[
+"S5MS1B",
+"271111160289",
+"BYIRINGIRO MANZI Thiery",
+""
+],
+[
+"S5MS1B",
+"560511180352",
+"GATUNGIRE Dasilva",
+""
+],
+[
+"S5MS1B",
+"271210160198",
+"HAKIZAYESU JEAN PASCAL",
+""
+],
+[
+"S5MS1B",
+"280602182244",
+"IGIHOZO Regis",
+""
+],
+[
+"S5MS1B",
+"110901190477",
+"IGIRANEZA Mediatrice",
+""
+],
+[
+"S5MS1B",
+"420915200008",
+"IGIZENEZA RERWA ANGE MERVEILLE",
+""
+],
+[
+"S5MS1B",
+"271210160156",
+"IHIRWE KAYITSINGA BELINDA",
+""
+],
+[
+"S5MS1B",
+"130713200065",
+"IKITEGETSE GIHOZO Prince",
+""
+],
+[
+"S5MS1B",
+"430826181138",
+"INEZA CELINE",
+""
+],
+[
+"S5MS1B",
+"240947230138",
+"INEZA Garve",
+""
+],
+[
+"S5MS1B",
+"310917220022",
+"INEZA MUGISHA Promesse",
+""
+],
+[
+"S5MS1B",
+"430809220024",
+"IRAKOZE GANZA RYAN",
+""
+],
+[
+"S5MS1B",
+"220306230138",
+"IRIBAGIZA BLANDINE",
+""
+],
+[
+"S5MS1B",
+"571018220108",
+"ISHIMWE PRINCE",
+""
+],
+[
+"S5MS1B",
+"130510190069",
+"ISHIMWE SAPHILO",
+""
+],
+[
+"S5MS1B",
+"260901160326",
+"ISIMBI BELLA BONITA",
+""
+],
+[
+"S5MS1B",
+"130719160044",
+"ISINGIZWE UWASE MARIE Ange Divine",
+""
+],
+[
+"S5MS1B",
+"310501230049",
+"KAMIKAZI UMURUNGI Bleza",
+""
+],
+[
+"S5MS1B",
+"330311190336",
+"KUBWAYO ADELINE",
+""
+],
+[
+"S5MS1B",
+"270829190093",
+"MANZI RYAN PRINCE",
+""
+],
+[
+"S5MS1B",
+"270502220008",
+"MASENGESHO Noble",
+""
+],
+[
+"S5MS1B",
+"540406230077",
+"MUGISHA BORIS",
+""
+],
+[
+"S5MS1B",
+"270809160569",
+"MUGISHA ESTHER",
+""
+],
+[
+"S5MS1B",
+"270904160820",
+"MURAGIJEMARIYA EMMANUELIE",
+""
+],
+[
+"S5MS1B",
+"210302160907",
+"MUTANGAMPUNDU Prince",
+""
+],
+[
+"S5MS1B",
+"240203190929",
+"NADRA AKEZA HEUREUSE",
+""
+],
+[
+"S5MS1B",
+"270507160628",
+"Nayituriki Solange",
+""
+],
+[
+"S5MS1B",
+"571308160229",
+"NDORIMANA Divine",
+""
+],
+[
+"S5MS1B",
+"420610190240",
+"NIYOMUGABA SAMUEL",
+""
+],
+[
+"S5MS1B",
+"260207190064",
+"NIYOMWUNGERI JONATHAN",
+""
+],
+[
+"S5MS1B",
+"431001190523",
+"NIYONGABO Wilson",
+""
+],
+[
+"S5MS1B",
+"120505161943",
+"NYAMPINGA ESTER",
+""
+],
+[
+"S5MS1B",
+"351210190123",
+"SIFA MUCYO Remy",
+""
+],
+[
+"S5MS1B",
+"260501200372",
+"TWAGIRUMUKIZA FELIX",
+""
+],
+[
+"S5MS1B",
+"310905190172",
+"TWAHIRWA SAIDI",
+""
+],
+[
+"S5MS1B",
+"111003160226",
+"UBARUTA IRVINE CHELISE",
+""
+],
+[
+"S5MS1B",
+"430203160852",
+"UJENEZA ROBERT",
+""
+],
+[
+"S5MS1B",
+"270109161379",
+"UKURANYITUZE Alain Tresor",
+""
+],
+[
+"S5MS1B",
+"511006230466",
+"UMUKUNDWA Joselyne",
+""
+],
+[
+"S5MS1B",
+"280310160410",
+"UMURERWA Gisele",
+""
+],
+[
+"S5MS1B",
+"530107200223",
+"UWASE CELINE",
+""
+],
+[
+"S5MS1B",
+"260916171745",
+"UWIMANA Maria Grace",
+""
+],
+[
+"S5MS1B",
+"421715160052",
+"UWISIMBI KAYISIRE SYLVIE",
+""
+],
+[
+"S5MS1B",
+"271210160561",
+"UWUMUTIMA KEZA NANCY",
+""
+],
+[
+"S5MS1B",
+"350412220001",
+"YESARAKIZA Gihozo Innocente",
+""
+],
+[
+"S5MS1C",
+"270308160055",
+"ABIJURU ALBERTINE",
+""
+],
+[
+"S5MS1C",
+"271217210602",
+"ABIJURU WIVINE",
+""
+],
+[
+"S5MS1C",
+"250101190126",
+"CYUSA LUCKY Blest",
+""
+],
+[
+"S5MS1C",
+"550412210697",
+"CYUZUZO Mourice",
+""
+],
+[
+"S5MS1C",
+"110406192214",
+"DUSABIMANA FRODOUARD",
+""
+],
+[
+"S5MS1C",
+"330426200183",
+"GWIZA Murinda Kelly",
+""
+],
+[
+"S5MS1C",
+"510104162182",
+"HAGENIMANA Jacques",
+""
+],
+[
+"S5MS1C",
+"121208200048",
+"HIMBAZWA GISELE",
+""
+],
+[
+"S5MS1C",
+"110601161080",
+"HIRWA ARTHUR",
+""
+],
+[
+"S5MS1C",
+"411603210486",
+"IGIHOZO TETA KELLIA",
+""
+],
+[
+"S5MS1C",
+"280704200362",
+"IHIRWE ANGE BETTY",
+""
+],
+[
+"S5MS1C",
+"270802180605",
+"IMPANO Angelo Tristan",
+""
+],
+[
+"S5MS1C",
+"230206160370",
+"INEZA AIME LEON",
+""
+],
+[
+"S5MS1C",
+"270107180786",
+"IRAKOZE RUGWIRO MUNYEMANA AIME",
+""
+],
+[
+"S5MS1C",
+"331105220981",
+"IRASUBIZA UWACU ESTHER",
+""
+],
+[
+"S5MS1C",
+"450302190154",
+"ISHEJA Uwase Nancy Naïlla",
+""
+],
+[
+"S5MS1C",
+"121201160035",
+"ISIMBI HAPPY DANIELLA",
+""
+],
+[
+"S5MS1C",
+"371508230026",
+"IYITANZAMAHORO Gisele",
+""
+],
+[
+"S5MS1C",
+"280507230187",
+"IZUWAYO Hilarie",
+""
+],
+[
+"S5MS1C",
+"560904230194",
+"KAMIKAZI KEZA KELIA",
+""
+],
+[
+"S5MS1C",
+"110921180299",
+"KAYIRANGA RUGWIRO BRUNO",
+""
+],
+[
+"S5MS1C",
+"351206230026",
+"MPUHWEZIMANA Augusta",
+""
+],
+[
+"S5MS1C",
+"120434220021",
+"MUGABE JEAN MARIE FRED",
+""
+],
+[
+"S5MS1C",
+"410501160505",
+"MUGENZI Jean Paul",
+""
+],
+[
+"S5MS1C",
+"520630220097",
+"MUGISHA LAMBERT",
+""
+],
+[
+"S5MS1C",
+"210702230008",
+"MUHAWENIMANA ODETTE",
+""
+],
+[
+"S5MS1C",
+"260915190449",
+"MUHAYIMANA KELLY",
+""
+],
+[
+"S5MS1C",
+"270913190925",
+"MUHIRE Joseph",
+""
+],
+[
+"S5MS1C",
+"360307160090",
+"MUHOZA PACIFIQUE",
+""
+],
+[
+"S5MS1C",
+"251709220179",
+"MUKUNZI Bruno",
+""
+],
+[
+"S5MS1C",
+"370824190156",
+"NISHIMWE LABAN",
+""
+],
+[
+"S5MS1C",
+"250201200209",
+"NTAWIHEBA FELIX",
+""
+],
+[
+"S5MS1C",
+"340110190299",
+"NTIVUGURUZWA PASCALINE",
+""
+],
+[
+"S5MS1C",
+"130909220009",
+"RUGAMBWA TETA Pretty",
+""
+],
+[
+"S5MS1C",
+"111001185373",
+"RUKUNDO Kalisa Aime Simplice",
+""
+],
+[
+"S5MS1C",
+"120203220136",
+"RWIBUTSO ANUAR RADOU",
+""
+],
+[
+"S5MS1C",
+"121019190278",
+"SHEJA MBABAZI COLOMBE",
+""
+],
+[
+"S5MS1C",
+"430826160618",
+"SHEJA UWASE DIVINE",
+""
+],
+[
+"S5MS1C",
+"410914210125",
+"TUYAMBAZE GANZA GAELLE",
+""
+],
+[
+"S5MS1C",
+"251403160233",
+"UMUHOZA IRIZA Sandrine",
+""
+],
+[
+"S5MS1C",
+"210301220088",
+"UMUHOZA Teta Rivine",
+""
+],
+[
+"S5MS1C",
+"130810220373",
+"UMUKUNDWA JULIETTE",
+""
+],
+[
+"S5MS1C",
+"270815200241",
+"UWASE SOLEIL CYNTHIA",
+""
+],
+[
+"S5MS1C",
+"280208200164",
+"UWIMANA STYVEN",
+""
+],
+[
+"S5MS1C",
+"430826160552",
+"UWIMPUHWE Hyacintha Gloria",
+""
+],
+[
+"S5MS1C",
+"260411184211",
+"UWINEZA Josiane",
+""
+],
+[
+"S5MS2A",
+"350106230124",
+"ABAYISENGA EMMANUEL",
+""
+],
+[
+"S5MS2A",
+"320601190544",
+"BAGIRISHEMA HAPPY PASCAL",
+""
+],
+[
+"S5MS2A",
+"560511160137",
+"BIHOGO Anna",
+""
+],
+[
+"S5MS2A",
+"570514220025",
+"BURAMBA IRADUKUNDA BRIANE",
+""
+],
+[
+"S5MS2A",
+"230505160725",
+"BYIRINGIRO GIDEON",
+""
+],
+[
+"S5MS2A",
+"521106180407",
+"CYUZUZO UMURAZA Nelly MITAVU",
+""
+],
+[
+"S5MS2A",
+"440305220730",
+"DUSENGIMANA JEAN PIERRE",
+""
+],
+[
+"S5MS2A",
+"571006160126",
+"GANZINEZA NIYONSABA Irene",
+""
+],
+[
+"S5MS2A",
+"110601160264",
+"GISINGIZO MARIE MARTINE NOELLA",
+""
+],
+[
+"S5MS2A",
+"120402161665",
+"HIRWA Kevin",
+""
+],
+[
+"S5MS2A",
+"280701190322",
+"IGIRANEZA Pasifique",
+""
+],
+[
+"S5MS2A",
+"310126160206",
+"IKIREZI Natacha",
+""
+],
+[
+"S5MS2A",
+"330805210875",
+"IMANISHIMWE CEDRIC",
+""
+],
+[
+"S5MS2A",
+"230312220023",
+"IMPUNDU DAISY ANAELLA",
+""
+],
+[
+"S5MS2A",
+"351212220217",
+"INEZAYE ELIEZEL",
+""
+],
+[
+"S5MS2A",
+"530409220020",
+"INGABIRE ALLEN FAVOUR",
+""
+],
+[
+"S5MS2A",
+"121022200128",
+"INGABIRE Mary",
+""
+],
+[
+"S5MS2A",
+"431014220027",
+"IRAGUHA Allan",
+""
+],
+[
+"S5MS2A",
+"241110230022",
+"IRAKOZE MICOMYIZA Fidelicie",
+""
+],
+[
+"S5MS2A",
+"340109160764",
+"IRANZI AIME",
+""
+],
+[
+"S5MS2A",
+"540402220097",
+"IRANZI UMUHIRE Agape",
+""
+],
+[
+"S5MS2A",
+"550605220620",
+"IRIHO AUDRICK",
+""
+],
+[
+"S5MS2A",
+"281209210528",
+"IRIZA MUGISHA Bernice",
+""
+],
+[
+"S5MS2A",
+"270117180280",
+"KARANGWA UWASE SAMUELLA",
+""
+],
+[
+"S5MS2A",
+"540320220016",
+"KAYITESI Emelyne",
+""
+],
+[
+"S5MS2A",
+"121502190481",
+"MBABAZIZAYO Divine",
+""
+],
+[
+"S5MS2A",
+"130313160900",
+"MIZERO Marie Stella",
+""
+],
+[
+"S5MS2A",
+"270911171204",
+"MUHAWENIMANA Quessia",
+""
+],
+[
+"S5MS2A",
+"510513220007",
+"MUHORAKEYE Peace",
+""
+],
+[
+"S5MS2A",
+"270826161225",
+"MUKAMISHA HAPPINESS",
+""
+],
+[
+"S5MS2A",
+"251507190237",
+"NAMBAJIMANA Viateur",
+""
+],
+[
+"S5MS2A",
+"570513160132",
+"NDAYAMBAJE ELLA BLESSING",
+""
+],
+[
+"S5MS2A",
+"250909160351",
+"NDICUNGUYE Kelvin",
+""
+],
+[
+"S5MS2A",
+"280602160992",
+"NDIZIHIWE Turashima Arcene",
+""
+],
+[
+"S5MS2A",
+"510618200126",
+"NIYOMWUNGERI FIDELE",
+""
+],
+[
+"S5MS2A",
+"571032160252",
+"NIYONSHUTI NADINE",
+""
+],
+[
+"S5MS2A",
+"421702200043",
+"NKUNDIMANA Jules Cesar",
+""
+],
+[
+"S5MS2A",
+"110815210268",
+"NSHUTI DECENTE",
+""
+],
+[
+"S5MS2A",
+"310501230070",
+"NTWALI Placide",
+""
+],
+[
+"S5MS2A",
+"221301220028",
+"NTWARI Dave Kevan",
+""
+],
+[
+"S5MS2A",
+"270829160275",
+"NZIZA BLAISE CHRISTIAN",
+""
+],
+[
+"S5MS2A",
+"520337160071",
+"RUMANZI JAMES",
+""
+],
+[
+"S5MS2A",
+"270107160091",
+"RURANGWA NGENZI DAVIS",
+""
+],
+[
+"S5MS2A",
+"270117180274",
+"SHEJA EMILE BERTRAND",
+""
+],
+[
+"S5MS2A",
+"121022160546",
+"SHIMWA MUCYO Arsene",
+""
+],
+[
+"S5MS2A",
+"120801160162",
+"TESI Candy",
+""
+],
+[
+"S5MS2A",
+"510603220342",
+"TORERO THEONESTE",
+""
+],
+[
+"S5MS2A",
+"271210181567",
+"UMUHIRE LIZA CELINE",
+""
+],
+[
+"S5MS2A",
+"351110190301",
+"UMUHOZA ROSINE",
+""
+],
+[
+"S5MS2A",
+"240804190621",
+"UWIKUNDA INEZA LILIANE",
+""
+],
+[
+"S5MS2A",
+"521311190002",
+"Uwitonze Deborah",
+""
+],
+[
+"S6MCBA",
+"270314160149",
+"Ayinkamiye Noella",
+""
+],
+[
+"S6MCBA",
+"230506190276",
+"BERWA KARANGWA Anissa Shine",
+""
+],
+[
+"S6MCBA",
+"270811200059",
+"BISANGWA KIMENYI EDUIN",
+""
+],
+[
+"S6MCBA",
+"330428162508",
+"CYIZA GISUBIZO ALIANE",
+""
+],
+[
+"S6MCBA",
+"210509200338",
+"CYUBAHIRO ARNAURD",
+""
+],
+[
+"S6MCBA",
+"410903220052",
+"GATOTO UWASE PRINCESSE",
+""
+],
+[
+"S6MCBA",
+"251406220044",
+"GIHOZO SIMBI DINAH",
+""
+],
+[
+"S6MCBA",
+"130912180394",
+"HABINEZA Janvier",
+""
+],
+[
+"S6MCBA",
+"570514180228",
+"HIRWA ANSWER DARSEN",
+""
+],
+[
+"S6MCBA",
+"560904230285",
+"IMBUTO MUGISHA AUDRAIN",
+""
+],
+[
+"S6MCBA",
+"120409190394",
+"INEZA BRILLANTE",
+""
+],
+[
+"S6MCBA",
+"130605180591",
+"INGABIRE Joy Rachel",
+""
+],
+[
+"S6MCBA",
+"321110230060",
+"ISHIMWE DELPHINE",
+""
+],
+[
+"S6MCBA",
+"271206171587",
+"ISHIMWE OLIVIER",
+""
+],
+[
+"S6MCBA",
+"560604190444",
+"ISHIMWE SANDRINE",
+""
+],
+[
+"S6MCBA",
+"210702220041",
+"ISHIMWE SANKARA DIEUDONNE",
+""
+],
+[
+"S6MCBA",
+"130801160368",
+"ISINGIZWE Marie Flora",
+""
+],
+[
+"S6MCBA",
+"270829180447",
+"ITUZE ORA KAYLA",
+""
+],
+[
+"S6MCBA",
+"131002160819",
+"KANYANA MUGISHA PRINCESS",
+""
+],
+[
+"S6MCBA",
+"271209181756",
+"KWIZERA Joselyne",
+""
+],
+[
+"S6MCBA",
+"121013190048",
+"KWIZERA MANZI Yves",
+""
+],
+[
+"S6MCBA",
+"530703184031",
+"MANISHIMWE SENDRINE",
+""
+],
+[
+"S6MCBA",
+"270822200271",
+"MASENGESHO Fabrice",
+""
+],
+[
+"S6MCBA",
+"270815190462",
+"MFURAYANJYE SANGWA AIME BORIS",
+""
+],
+[
+"S6MCBA",
+"131007160436",
+"MUGISHA Derick",
+""
+],
+[
+"S6MCBA",
+"260501191080",
+"Mujawimana Jeannine",
+""
+],
+[
+"S6MCBA",
+"370506191018",
+"MUTESI YVONNE",
+""
+],
+[
+"S6MCBA",
+"270816190571",
+"MUTONIWASE Chantal",
+""
+],
+[
+"S6MCBA",
+"240919220036",
+"Ndayishimiye Aime Patrick",
+""
+],
+[
+"S6MCBA",
+"260708160341",
+"NIMUGIRE Sarah",
+""
+],
+[
+"S6MCBA",
+"310308190404",
+"NIYOMUKIZA Joselyne",
+""
+],
+[
+"S6MCBA",
+"270110160584",
+"NIYONKURU DAVID",
+""
+],
+[
+"S6MCBA",
+"452004160803",
+"NIYONKURU ERIC",
+""
+],
+[
+"S6MCBA",
+"221309190323",
+"NIYONKURU Furaha",
+""
+],
+[
+"S6MCBA",
+"361206200969",
+"NIYONKURU ORESTE",
+""
+],
+[
+"S6MCBA",
+"440913210031",
+"NIYONZIMA Phillipe Nelly",
+""
+],
+[
+"S6MCBA",
+"280610180761",
+"NSHIMIYIMANA Gad",
+""
+],
+[
+"S6MCBA",
+"260915160809",
+"NTEZIMANA Dorcas",
+""
+],
+[
+"S6MCBA",
+"271210160371",
+"RUBANDA JEAN FRANCOIS REGIS",
+""
+],
+[
+"S6MCBA",
+"310107200135",
+"RWEMARIKA Leonard",
+""
+],
+[
+"S6MCBA",
+"260207190705",
+"SEWASE GANDHI SONIA",
+""
+],
+[
+"S6MCBA",
+"120736190698",
+"SHIMIRWA ALINE",
+""
+],
+[
+"S6MCBA",
+"210126160038",
+"SHIMWA ORNELLA",
+""
+],
+[
+"S6MCBA",
+"570405200456",
+"TUYISHIME Blaise",
+""
+],
+[
+"S6MCBA",
+"221103161355",
+"TUYISHIMIRE BENITHA",
+""
+],
+[
+"S6MCBA",
+"451405190330",
+"TUYISHIMIRE Kelly",
+""
+],
+[
+"S6MCBA",
+"360903160811",
+"Ujeneza AIME JEAN DE DIEU",
+""
+],
+[
+"S6MCBA",
+"430712200001",
+"UMUHIRE BELYSE",
+""
+],
+[
+"S6MCBA",
+"281006161690",
+"UMUTESI NSENGIYUMVA BELYSE",
+""
+],
+[
+"S6MCBA",
+"241406200343",
+"UWAYO HABINEZA Kellia",
+""
+],
+[
+"S6MCBA",
+"241402190224",
+"UWIMANA Chantal",
+""
+],
+[
+"S6MCBA",
+"270813200379",
+"UWIMANA Emerance",
+""
+],
+[
+"S6MCBA",
+"220404200425",
+"UWINEZA Aliane",
+""
+],
+[
+"S6MCBA",
+"360909200030",
+"YANDAGIYE Fabrice",
+""
+],
+[
+"S6MEGA",
+"130909180402",
+"AKALIZA RURANGIRWA NADEGE",
+""
+],
+[
+"S6MEGA",
+"240919190050",
+"BAZIMYA MUYANGO Juldas",
+""
+],
+[
+"S6MEGA",
+"240807160095",
+"BURAME IHIRE ELLA ROSELYNE",
+""
+],
+[
+"S6MEGA",
+"511115160106",
+"Hakizimana Ingabire Marie Liesse",
+""
+],
+[
+"S6MEGA",
+"240919220183",
+"HIRWA LAURENT",
+""
+],
+[
+"S6MEGA",
+"241412200025",
+"IMANISHIMWE Parfaite",
+""
+],
+[
+"S6MEGA",
+"130509160414",
+"INEZA Erica",
+""
+],
+[
+"S6MEGA",
+"270829180448",
+"INEZA NZEYIMANA CHANCE",
+""
+],
+[
+"S6MEGA",
+"270910220113",
+"Ingabire Jeannette",
+""
+],
+[
+"S6MEGA",
+"311314200287",
+"IRAGENA THABITA",
+""
+],
+[
+"S6MEGA",
+"270111161275",
+"IRAKARAMA AGRIPINE",
+""
+],
+[
+"S6MEGA",
+"121004200410",
+"IRUMVA EMMANUEL",
+""
+],
+[
+"S6MEGA",
+"121017170617",
+"ISIMBI Doris",
+""
+],
+[
+"S6MEGA",
+"230312220003",
+"KARANGWA IGIHOZO PAMELLA",
+""
+],
+[
+"S6MEGA",
+"220803200533",
+"KWIZERA FISTON",
+""
+],
+[
+"S6MEGA",
+"270813160681",
+"MBARUSHIMANA ISHIMWE Jeremie",
+""
+],
+[
+"S6MEGA",
+"521024200093",
+"MUGISHA YVES",
+""
+],
+[
+"S6MEGA",
+"110921200100",
+"MUGORUKEYE Shamira",
+""
+],
+[
+"S6MEGA",
+"110401200434",
+"MUKESHIMANA FLORENCE",
+""
+],
+[
+"S6MEGA",
+"120735200284",
+"MUSHIMIYIMANA MARIE ROSE",
+""
+],
+[
+"S6MEGA",
+"521005160517",
+"MUTESI OLIVER",
+""
+],
+[
+"S6MEGA",
+"280806181731",
+"NDIKUBWIMANA EMMANUEL",
+""
+],
+[
+"S6MEGA",
+"510619190041",
+"NIYONSHUTI Celine",
+""
+],
+[
+"S6MEGA",
+"210117240002",
+"NKURUNZIZA Hassan",
+""
+],
+[
+"S6MEGA",
+"331209200273",
+"NSENGIYUMVA GISUBIZO JERUSALEM",
+""
+],
+[
+"S6MEGA",
+"270816190326",
+"RUDASINGWA CYIZA Crispin",
+""
+],
+[
+"S6MEGA",
+"430605150080",
+"SHEMA Chris",
+""
+],
+[
+"S6MEGA",
+"120909160090",
+"SHEMA MUVUNYI BRIAN",
+""
+],
+[
+"S6MEGA",
+"240919220190",
+"SONGA BLESSING",
+""
+],
+[
+"S6MEGA",
+"540803200447",
+"TUMUKUNDE PHIONAH",
+""
+],
+[
+"S6MEGA",
+"330402191408",
+"TUYISHIME Gilbert",
+""
+],
+[
+"S6MEGA",
+"130905190626",
+"UMURERWA KAMANZI KEVINE",
+""
+],
+[
+"S6MEGA",
+"530409200010",
+"UMWARI Shallon",
+""
+],
+[
+"S6PCBA",
+"450706160456",
+"AMIRINGIRO GISELE",
+""
+],
+[
+"S6PCBA",
+"520401200033",
+"AYEBARE FRANK",
+""
+],
+[
+"S6PCBA",
+"241414160091",
+"BAYIKUNDE HONORE",
+""
+],
+[
+"S6PCBA",
+"421603160066",
+"BYISHIMO Nelson Dorian",
+""
+],
+[
+"S6PCBA",
+"221003190168",
+"DORISHIMWE light tekero",
+""
+],
+[
+"S6PCBA",
+"260901190219",
+"DUFITUMUKIZA Jonadab",
+""
+],
+[
+"S6PCBA",
+"341102190554",
+"DUKUZIMANA FIDELE",
+""
+],
+[
+"S6PCBA",
+"571037190152",
+"GATOTO AIDA",
+""
+],
+[
+"S6PCBA",
+"271210160305",
+"GIKUNDIRO HIRWA ELOUA JACQUES",
+""
+],
+[
+"S6PCBA",
+"280101190216",
+"HAGENIMANA Gervais",
+""
+],
+[
+"S6PCBA",
+"330423190006",
+"HIMBAZA MARIE JESSICA",
+""
+],
+[
+"S6PCBA",
+"210618220300",
+"IHIRWE JOY BENITHA",
+""
+],
+[
+"S6PCBA",
+"260917190409",
+"INEZA Marie Faustine",
+""
+],
+[
+"S6PCBA",
+"250314160364",
+"INEZA TETA NANCY",
+""
+],
+[
+"S6PCBA",
+"430214200191",
+"IRAKOZE MUNEZERO JACQUES",
+""
+],
+[
+"S6PCBA",
+"271210181618",
+"IRAKOZE UWASE KELLIAH",
+""
+],
+[
+"S6PCBA",
+"360902190088",
+"IRANKUNDA JUSTIN",
+""
+],
+[
+"S6PCBA",
+"520101160145",
+"IREBE Teta",
+""
+],
+[
+"S6PCBA",
+"411202160044",
+"ISENGWE KERRY",
+""
+],
+[
+"S6PCBA",
+"440709200145",
+"ISHIMWE DIEU DONNE",
+""
+],
+[
+"S6PCBA",
+"110920210102",
+"ISHIMWE MIGISHA Nelly",
+""
+],
+[
+"S6PCBA",
+"131012200072",
+"ISHIMWE MUKIZA Eric",
+""
+],
+[
+"S6PCBA",
+"540311190062",
+"ISIMBI Nancy",
+""
+],
+[
+"S6PCBA",
+"281201190383",
+"ISIMBI Nicky Merveille",
+""
+],
+[
+"S6PCBA",
+"351110190274",
+"ISINGIZWE Carine",
+""
+],
+[
+"S6PCBA",
+"220604161007",
+"IYODUSENGA IRUMVA SAMUEL",
+""
+],
+[
+"S6PCBA",
+"421702190556",
+"IZERA CYNTHIA",
+""
+],
+[
+"S6PCBA",
+"110405200300",
+"IZERE Fred Kenny",
+""
+],
+[
+"S6PCBA",
+"270803190167",
+"KEZA AIMAN SARIHAH",
+""
+],
+[
+"S6PCBA",
+"130911160247",
+"KWIZERA Honorine",
+""
+],
+[
+"S6PCBA",
+"360602190272",
+"MAHORO Joyeuse",
+""
+],
+[
+"S6PCBA",
+"360602190764",
+"MFITUMUKIZA Fabrice",
+""
+],
+[
+"S6PCBA",
+"220803194258",
+"MUCUNGUZI DAVID",
+""
+],
+[
+"S6PCBA",
+"250307220016",
+"MUCUNGUZI Kelly Salvator",
+""
+],
+[
+"S6PCBA",
+"260901160418",
+"MUGISHA ARAPHAT",
+""
+],
+[
+"S6PCBA",
+"531301190133",
+"MUKESHIMANA Yvonne",
+""
+],
+[
+"S6PCBA",
+"540102150011",
+"MUKUNDWA Sandrine",
+""
+],
+[
+"S6PCBA",
+"360911200008",
+"MUSHIMIYIMANA LINCORNE ZACHARIE",
+""
+],
+[
+"S6PCBA",
+"121119190306",
+"NISHIMWE Wivine",
+""
+],
+[
+"S6PCBA",
+"330423190029",
+"NIYIGABA JOSUE",
+""
+],
+[
+"S6PCBA",
+"310912160262",
+"NIYIGENA Pierrette",
+""
+],
+[
+"S6PCBA",
+"260210190394",
+"NIYIMURORA Gloria",
+""
+],
+[
+"S6PCBA",
+"260803190365",
+"NIYINGABIRA Clemence",
+""
+],
+[
+"S6PCBA",
+"320208160114",
+"NIYOGUSHIMWA Dieu Aime",
+""
+],
+[
+"S6PCBA",
+"270813160682",
+"NKURUNZIZA ABDON",
+""
+],
+[
+"S6PCBA",
+"540107220015",
+"NZITONDA Sufficient Princess",
+""
+],
+[
+"S6PCBA",
+"120909161360",
+"SEMPIGA MITCH",
+""
+],
+[
+"S6PCBA",
+"270404160579",
+"TUYISHIME Ange Oreste",
+""
+],
+[
+"S6PCBA",
+"521013220013",
+"UMUKUNZI Valentine",
+""
+],
+[
+"S6PCBA",
+"120922160100",
+"UMUTESI INEZA Kelia",
+""
+],
+[
+"S6PCBA",
+"250311190510",
+"UMUTONI Hortance",
+""
+],
+[
+"S6PCBA",
+"331220190381",
+"UWIDUHAYE James",
+""
+],
+[
+"S6PCBA",
+"451304190861",
+"YUMVAGUSENGA JEAN DE DIEU",
+""
+],
+[
+"S6PCMA",
+"370505181476",
+"ABAYISENGA Marthe",
+""
+],
+[
+"S6PCMA",
+"410502230218",
+"BAHOZA Fabrice",
+""
+],
+[
+"S6PCMA",
+"450608180193",
+"CYUBAHIRO Volonte Lauben",
+""
+],
+[
+"S6PCMA",
+"430824210004",
+"CYUSA MUGABO MAXIME",
+""
+],
+[
+"S6PCMA",
+"431109160136",
+"Dusengimana Fabrice",
+""
+],
+[
+"S6PCMA",
+"370506190990",
+"GAMBINEZA MUGISHA ARIEL",
+""
+],
+[
+"S6PCMA",
+"250306180232",
+"HABINEZA Jeannette",
+""
+],
+[
+"S6PCMA",
+"560514160275",
+"HIRWA BARAHIRA GUERISCHOM",
+""
+],
+[
+"S6PCMA",
+"370909200130",
+"HIRWA Jean Denys",
+""
+],
+[
+"S6PCMA",
+"531101160612",
+"IGIRANEZA NTWALI BONHEUR",
+""
+],
+[
+"S6PCMA",
+"280107181031",
+"IRADUKUNDA GABY JACKSON",
+""
+],
+[
+"S6PCMA",
+"551105220015",
+"IRADUKUNDA Pacifique",
+""
+],
+[
+"S6PCMA",
+"270902230077",
+"IRASHOBOYE KARELLE",
+""
+],
+[
+"S6PCMA",
+"130211200125",
+"ISHIMWE GILBERT",
+""
+],
+[
+"S6PCMA",
+"270803160942",
+"ISHIMWE Hadjala",
+""
+],
+[
+"S6PCMA",
+"250311220326",
+"ISHIMWE KEVINE",
+""
+],
+[
+"S6PCMA",
+"221004200303",
+"ISHIMWE MANZI David",
+""
+],
+[
+"S6PCMA",
+"131012200084",
+"KANAMUGIRE FAVOUR",
+""
+],
+[
+"S6PCMA",
+"521013220054",
+"KARHABONA Daniella Martha",
+""
+],
+[
+"S6PCMA",
+"271210181694",
+"KIREZI ISIMBI LYSE NIELLA",
+""
+],
+[
+"S6PCMA",
+"250307220035",
+"KUBWAYO Leon Ruben",
+""
+],
+[
+"S6PCMA",
+"271203160517",
+"MUCOWAMAHORO CYUZUZO SABRINE",
+""
+],
+[
+"S6PCMA",
+"270802160270",
+"MUGISHA MFURA Cedric",
+""
+],
+[
+"S6PCMA",
+"270904160189",
+"MUHAWENIMANA Assoumpta",
+""
+],
+[
+"S6PCMA",
+"430824161398",
+"MUHIRE Kelly Evangelique",
+""
+],
+[
+"S6PCMA",
+"510913200851",
+"MUZUNGU Ghad",
+""
+],
+[
+"S6PCMA",
+"430802200013",
+"NEEMA CHANCE PARFAITE",
+""
+],
+[
+"S6PCMA",
+"121008232253",
+"NIRERE FAITH PRINCESS",
+""
+],
+[
+"S6PCMA",
+"280204220002",
+"NISHIMWE Jacqueline",
+""
+],
+[
+"S6PCMA",
+"430219200284",
+"NIZEYIMANA Dieudonne",
+""
+],
+[
+"S6PCMA",
+"240919220087",
+"NSHIMIYIMANA YVAN PRINCE",
+""
+],
+[
+"S6PCMA",
+"310107200134",
+"NSHUTI Baraka HUGUET",
+""
+],
+[
+"S6PCMA",
+"430219190264",
+"NZAYISENGA Aline",
+""
+],
+[
+"S6PCMA",
+"120707160813",
+"RUBAYITA GIHANGO Byron",
+""
+],
+[
+"S6PCMA",
+"120909161488",
+"RUGEMA SANO KENNY",
+""
+],
+[
+"S6PCMA",
+"560513160167",
+"SHEMA Bonheur",
+""
+],
+[
+"S6PCMA",
+"110509190176",
+"SHIMWAMUKIZA Louis Bertrand",
+""
+],
+[
+"S6PCMA",
+"110601160453",
+"TWAHIRWA Germain",
+""
+],
+[
+"S6PCMA",
+"241304190613",
+"TWIBUKIMANA Noella",
+""
+],
+[
+"S6PCMA",
+"240711200704",
+"UMUTONIWASE CLAIRE",
+""
+],
+[
+"S6PCMA",
+"321110220038",
+"UWIDUHAYE DIANE",
+""
+],
+[
+"S6PCMA",
+"121004200391",
+"UWIMANA CHALOM OLIVIER",
+""
+]
+]
+}

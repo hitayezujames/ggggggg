@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Classes{% endblock %}
+{% block content %}
+<div class="head"><div><h1>Classes</h1><div class="muted">“Class list” shows all the students of a class. “Manage” is where you choose the class teacher, the subjects and their teachers.</div></div>
+  <div class="actions"><a class="btn" href="{{ url_for('admin_import') }}">Import student lists (Excel)</a></div></div>
+
+{% if classes %}
+<details class="classgroup" open>
+  <summary>
+    <span class="cg-arrow" aria-hidden="true"></span><span class="cg-dot" aria-hidden="true"></span>
+    <span class="cg-title"><b>Secondary</b><span>{{ combos[:3]|join(', ') }}{% if combos|length > 3 %} +{{ combos|length - 3 }} more{% endif %}</span></span>
+    <span class="cg-count">{{ classes|length }} class{{ '' if classes|length == 1 else 'es' }}</span>
+  </summary>
+  <div class="scroll"><table class="classes">
+    <thead><tr><th>No.</th><th>Combination</th><th>Grade</th><th>Classroom</th><th>Class group</th><th class="size">Size</th><th class="acts-h">Actions</th></tr></thead>
+    <tbody>
+    {% for c in classes %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td class="combo" title="{{ c.combination_shown }}">{{ c.combination_shown or '–' }}</td>
+        <td>{{ c.grade_shown or '–' }}</td>
+        <td><a href="{{ url_for('admin_class', class_id=c.id) }}">{{ c.name }}</a></td>
+        <td><span class="group-pill">{{ c.name }}</span></td>
+        <td class="size">{{ c.n_students }}</td>
+        <td class="acts-c">
+          <a class="btn sm ghost" href="{{ url_for('admin_class_list', class_id=c.id) }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Class list</a>
+          <a class="btn sm ghost" href="{{ url_for('admin_class', class_id=c.id) }}">Manage</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+</details>
+{% else %}
+<div class="card"><div class="empty" style="padding:0">No classes yet. Import the student lists, or add the first class below.</div></div>
+{% endif %}
+
+<div class="card" style="max-width:760px">
+  <h2>Add a class</h2>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="row">
+      <div class="field"><label for="name">Classroom (class name)</label><input type="text" id="name" name="name" required placeholder="e.g. S1B" maxlength="40"></div>
+      <div class="field"><label for="grade">Grade</label><input type="text" id="grade" name="grade" placeholder="e.g. SENIOR 1" maxlength="40"></div>
+      <div class="field"><label for="combination">Combination</label><input type="text" id="combination" name="combination" placeholder="e.g. ORDINARY LEVEL" maxlength="80"></div>
+    </div>
+    <div class="field" style="margin-top:12px"><label for="level_id">Level (subject list)</label>
+      <select id="level_id" name="level_id" required><option value="">— choose —</option>{% for l in levels %}<option value="{{ l.id }}">{{ l.name }} ({{ l.n_subjects }} subjects, total {{ l.total_max|num }})</option>{% endfor %}</select>
+      <div class="hint">The level decides the subjects and maximums on this class&#39;s report. Levels are set up under <a href="{{ url_for('admin_subjects') }}">Levels &amp; subjects</a>.</div></div>
+    <button class="btn" type="submit">Add class</button>
+  </form>
+</div>
+{% endblock %}

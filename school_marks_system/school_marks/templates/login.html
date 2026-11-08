@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Log in{% endblock %}
+{% block auth %}
+<h2>Log in</h2>
+<form method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <div class="field"><label for="username">Username</label><input type="text" id="username" name="username" value="{{ username }}" required autofocus></div>
+  <div class="field"><label for="password">Password</label><input type="password" id="password" name="password" required></div>
+  <button class="btn" type="submit">Log in</button>
+</form>
+<p class="alt">New staff member? <a href="{{ url_for('register') }}">Register your account</a></p>
+<p class="hint" style="text-align:center;margin:12px 0 0">One browser is one person at a time. Logging in here logs the previous person out of this browser. Each person should use their own phone or computer, or a private (incognito) window.</p>
+{% endblock %}

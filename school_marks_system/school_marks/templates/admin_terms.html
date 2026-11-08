@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Academic years{% endblock %}
+{% macro act(t, action, label, cls='ghost', confirm='') %}
+<form class="inline" method="post" action="{{ url_for('admin_term_action', tid=t.id, action=action) }}" {% if confirm %}onsubmit="return confirm('{{ confirm }}')"{% endif %}>
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn sm {{ cls }}">{{ label }}</button></form>
+{% endmacro %}
+{% block content %}
+<div class="head"><div><h1>Academic years &amp; terms</h1><div class="muted">Marks are kept per term. Only the admin can add or change academic years here. Teachers can only switch between them with “Academic year” in the menu.</div></div></div>
+
+{% if not years %}<div class="notice">No academic year yet. Add the first one below — teachers cannot enter marks without a term.</div>{% endif %}
+
+{% for y in years %}
+<div class="card flush">
+  <h2>{% if y.year %}Academic year {{ y.year }}{% else %}Terms without an academic year{% endif %}</h2>
+  {% if y.year %}
+  <form method="post" action="{{ url_for('admin_year_rename') }}" class="row" style="padding:0 18px 12px">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="old" value="{{ y.year }}">
+    <div class="field" style="max-width:260px"><label for="year-{{ loop.index }}">Change the academic year</label><input type="text" id="year-{{ loop.index }}" name="new" value="{{ y.year }}" maxlength="30" required></div>
+    <button class="btn ghost" type="submit">Save</button>
+  </form>
+  {% else %}<p class="hint">Open “Change” on a term and type its academic year to group it.</p>{% endif %}
+  <div class="scroll"><table>
+    <thead><tr><th>Term (as printed on the report)</th><th>Status</th><th class="n">Marks</th><th></th></tr></thead>
+    <tbody>
+    {% for t in y.terms %}
+      <tr><td class="strong">{{ t.name }}
+          <details class="inline-edit"><summary class="small">Change</summary>
+            <form method="post" action="{{ url_for('admin_term_action', tid=t.id, action='edit') }}" class="row" style="margin-top:8px">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <div class="field"><label for="tn{{ t.id }}">Term name</label><input type="text" id="tn{{ t.id }}" name="name" value="{{ t.name }}" maxlength="60" required></div>
+              <div class="field narrow" style="flex-basis:150px"><label for="ty{{ t.id }}">Academic year</label><input type="text" id="ty{{ t.id }}" name="year" value="{{ t.year }}" maxlength="30"></div>
+              <button class="btn sm ghost" type="submit">Save</button>
+            </form></details></td>
+        <td>{% if t.is_current %}<span class="tag ok">current</span>{% endif %} {% if t.is_locked %}<span class="tag off">locked</span>{% endif %}</td>
+        <td class="n">{{ t.n_marks }}</td>
+        <td class="right nowrap">
+          {% if not t.is_current %}{{ act(t, 'current', 'Make current', 'ghost', 'Make this the current term of the whole school? Everyone will start in it when they log in.') }}{% endif %}
+          {{ act(t, 'lock', 'Unlock' if t.is_locked else 'Lock') }}
+          {% if not t.n_assess %}{{ act(t, 'delete', 'Delete', 'danger', 'Delete this term?') }}{% endif %}
+        </td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+</div>
+{% endfor %}
+
+<div class="grid2">
+  <div class="card">
+    <h2>Add an academic year</h2>
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="action" value="add_year">
+      <div class="row">
+        <div class="field"><label for="year">Academic year</label><input type="text" id="year" name="year" maxlength="30" required placeholder="2026-2027"></div>
+        <div class="field narrow"><label for="count">Terms</label><select id="count" name="count"><option>3</option><option>2</option><option>1</option><option>4</option></select></div>
+      </div>
+      <p class="hint" style="margin-top:10px">Creates the terms for you, named as on the report: “2026-2027 TERM 1”, “TERM 2”, “TERM 3”.</p>
+      <button class="btn" type="submit">Add academic year</button>
+    </form>
+  </div>
+  <div class="card">
+    <h2>Add one term</h2>
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="row">
+        <div class="field"><label for="name">Term name (as printed)</label><input type="text" id="name" name="name" maxlength="60" required placeholder="2025-2026 TERM 1"></div>
+        <div class="field narrow" style="flex-basis:150px"><label for="tyear">Academic year</label><input type="text" id="tyear" name="year" maxlength="30" placeholder="2025-2026"></div>
+      </div>
+      <p style="margin:12px 0 0"><button class="btn ghost" type="submit">Add term</button></p>
+    </form>
+    <p class="hint" style="margin:10px 0 0"><b>Make current</b> moves the whole school to a term. <b>Lock</b> a term when its reports are final, so marks cannot be changed. A term with marks cannot be deleted.</p>
+  </div>
+</div>
+{% endblock %}

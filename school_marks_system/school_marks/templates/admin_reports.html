@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Reports &amp; monitoring{% endblock %}
+{% block content %}
+<div class="head"><div><h1>Reports &amp; monitoring</h1><div class="muted">{% if term %}{{ term.name }} · See which teachers have entered their marks, and generate the reports of each class.{% else %}Add an academic year first.{% endif %}</div></div></div>
+
+{% if term %}
+<div class="stats">
+  <div class="stat"><b>{{ counts['all entered'] }}</b><span>teachers have entered all their marks</span></div>
+  <div class="stat"><b>{{ counts['not finished'] }}</b><span>teachers have not finished</span></div>
+  <div class="stat"><b>{{ counts['nothing entered'] }}</b><span>teachers have entered nothing</span></div>
+  <div class="stat"><b>{{ ready }} / {{ classes|length }}</b><span>classes ready for reports</span></div>
+</div>
+
+<div class="card flush" id="teachers">
+  <h2>Teachers: who has entered marks</h2>
+  <p class="hint">A subject is complete when every student of the class has a mark in it (tests and exam). Click a teacher to see each subject.</p>
+  {% if people %}
+  <div class="scroll"><table>
+    <thead><tr><th>Teacher</th><th class="n">Subjects</th><th class="n">Complete</th><th class="n">Started</th><th class="n">Nothing entered</th><th>Status</th><th>Last time marks were saved</th></tr></thead>
+    <tbody>
+    {% for t in people %}
+      <tr>
+        <td><button type="button" class="rowtoggle" aria-expanded="false" aria-controls="detail-{{ t.id }}"><span aria-hidden="true">▸</span> {{ t.name }}</button></td>
+        <td class="n">{{ t.subjects|length }}</td><td class="n">{{ t.complete }}</td><td class="n">{{ t.started }}</td><td class="n">{{ t.nothing }}</td>
+        <td>{% if t.state == 'all entered' %}<span class="tag ok">all entered</span>{% elif t.state == 'not finished' %}<span class="tag wait">not finished</span>{% else %}<span class="tag bad">nothing entered</span>{% endif %}</td>
+        <td class="small muted nowrap">{{ t.last or 'never' }}</td>
+      </tr>
+      <tr class="detail" id="detail-{{ t.id }}" hidden><td colspan="7">
+        <table class="inner"><thead><tr><th>Class</th><th>Subject</th><th>Status</th><th>What is entered</th></tr></thead><tbody>
+          {% for x in t.subjects %}<tr><td class="strong">{{ x.class_name }}</td><td><a href="{{ url_for('marks', alloc_id=x.allocation_id, term=term.id) }}">{{ x.name }}</a></td>
+            <td>{% if x.state == 'complete' %}<span class="tag ok">complete</span>{% elif x.state == 'started' %}<span class="tag wait">started</span>{% else %}<span class="tag bad">nothing entered</span>{% endif %}</td>
+            <td class="small">{% if x.state == 'complete' %}all {{ x.students }} students have a mark{% elif x.state == 'started' %}{{ x.have }} of {{ x.students }} students have a mark · {{ x.tests }} test{{ '' if x.tests == 1 else 's' }}, {{ 'exam entered' if x.exam else 'no exam yet' }}{% else %}{{ x.tests }} test{{ '' if x.tests == 1 else 's' }} created, no marks typed{% endif %}</td></tr>{% endfor %}
+        </tbody></table>
+      </td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+  {% else %}<div class="empty">No teacher has been given a subject in a class with students yet.</div>{% endif %}
+</div>
+
+<div class="card flush" id="classes">
+  <h2>Classes: generate the reports</h2>
+  <p class="hint">A class is ready when every subject has a mark for every student. You can generate the reports at any time; subjects without a mark are empty on the report.</p>
+  {% if classes %}
+  <div class="scroll"><table>
+    <thead><tr><th>Class</th><th class="n">Students</th><th>Marks entered by the teachers</th><th>Status</th><th>Generate</th></tr></thead>
+    <tbody>
+    {% for c in classes %}
+      <tr>
+        <td><span class="strong">{{ c.cls.name }}</span><div class="small muted">{{ c.cls.class_teacher_name or 'no class teacher' }}</div></td>
+        <td class="n">{{ c.students }}</td>
+        <td style="min-width:240px">
+          {% if c.subjects %}<div class="bar"><i style="width:{{ c.percent }}%"></i></div><span class="small muted">{{ c.done }} of {{ c.subjects }} subjects complete</span>
+          {% if c.waiting and c.students %}
+          <details class="inline-edit"><summary class="small">Waiting for {{ c.waiting|length }} subject{{ '' if c.waiting|length == 1 else 's' }}</summary>
+            <ul class="small" style="margin:6px 0 0;padding-left:18px">
+              {% for w in c.waiting %}<li>{% if w.allocation_id %}<a href="{{ url_for('marks', alloc_id=w.allocation_id, term=term.id) }}">{{ w.name }}</a>{% else %}{{ w.name }}{% endif %} – {{ w.teacher or 'no teacher chosen' }}: {{ w.have }} of {{ c.students }} students have a mark</li>{% endfor %}
+            </ul></details>
+          {% endif %}
+          {% else %}<span class="small muted">no subject has a teacher yet</span>{% endif %}
+        </td>
+        <td>{% if c.state == 'ready' %}<span class="tag ok">ready</span>{% elif c.state == 'in progress' %}<span class="tag wait">in progress</span>{% else %}<span class="tag off">{{ c.state }}</span>{% endif %}</td>
+        <td class="acts" style="text-align:left">
+          {% if c.students and c.subjects %}
+          <a class="btn sm {{ '' if c.state == 'ready' else 'ghost' }}" target="_blank" href="{{ url_for('report_cards_pdf', class_id=c.cls.id, term=term.id) }}" {% if c.state != 'ready' %}onclick="return confirm('Not all marks of this class are entered yet. Subjects without a mark will be empty on the reports. Generate anyway?')"{% endif %}>Report cards PDF</a>
+          <a class="btn sm" target="_blank" href="{{ url_for('periodical_pdf', class_id=c.cls.id, term=term.id) }}" title="Tests only, no exam">Periodical reports PDF</a>
+          <a class="btn sm ghost" target="_blank" href="{{ url_for('class_marksheet_pdf', class_id=c.cls.id, term=term.id) }}">Marksheet PDF</a>
+          {% endif %}
+          <a class="btn sm ghost" href="{{ url_for('class_results', class_id=c.cls.id, term=term.id) }}">Results</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+  {% else %}<div class="empty">No classes yet.</div>{% endif %}
+</div>
+<p class="hint">“Report cards PDF” makes one page per student for the whole class. To look at another term, change the Academic year in the menu.</p>
+{% endif %}
+{% endblock %}
+{% block scripts %}<script>
+document.querySelectorAll('.rowtoggle').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var row = document.getElementById(b.getAttribute('aria-controls')), open = row.hidden;
+    row.hidden = !open; b.setAttribute('aria-expanded', open ? 'true' : 'false'); b.firstElementChild.textContent = open ? '▾' : '▸';
+  });
+});
+</script>{% endblock %}

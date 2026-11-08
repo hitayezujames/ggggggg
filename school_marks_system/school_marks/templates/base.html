@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Marks{% endblock %} · {{ school_name }}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+{% macro flashes() %}
+  {% for category, message in get_flashed_messages(with_categories=true) %}
+    <div class="flash {{ category }}" role="status">{{ message }}</div>
+  {% endfor %}
+{% endmacro %}
+{% set ICONS = {
+  'dash': '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+  'school': '<path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/>',
+  'students': '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  'staff': '<circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M19 8v6"/><path d="M22 11h-6"/>',
+  'reports': '<path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/>',
+  'me': '<circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0 1 16 0v1"/>',
+  'out': '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/>'} %}
+{% macro icon(name) %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{{ ICONS[name]|safe }}</svg>{% endmacro %}
+{% macro nav(endpoint, label, badge=0, ico='') %}
+  <a href="{{ url_for(endpoint) }}" class="{{ 'on' if request.endpoint in (endpoint,) + varargs else '' }}">{% if ico %}{{ icon(ico) }}{% endif %}{{ label }}{% if badge %}<span class="badge">{{ badge }}</span>{% endif %}</a>
+{% endmacro %}
+{% if user %}
+<body data-user="{{ user.id }}">
+<div id="switched" class="switched" hidden role="alertdialog" aria-labelledby="switched-title">
+  <div class="card">
+    <h2 id="switched-title">This page belongs to {{ user.full_name }}</h2>
+    <p id="switched-text"></p>
+    <p class="hint">One browser can be logged in as only one person at a time. To use two accounts at once on the same computer, open the second one in a private (incognito) window or in another browser.</p>
+    <p style="margin:0"><a class="btn" id="switched-go" href="{{ url_for('home') }}">Continue</a></p>
+  </div>
+</div>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span>Marks system</span><b>{{ school_name }}</b></div>
+    {% if nav_terms %}
+    <form method="post" action="{{ url_for('switch_term') }}" class="yearpick">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="next" value="{{ request.full_path }}">
+      <label for="term_id">Academic year</label>
+      <select id="term_id" name="term_id" onchange="this.form.submit()" title="Change the academic year / term you are working in">
+        {% for group in nav_terms|groupby('year')|reverse %}
+          {% if group.grouper %}<optgroup label="{{ group.grouper }}">{% endif %}
+          {% for t in group.list %}<option value="{{ t.id }}" {{ 'selected' if active_term and t.id == active_term.id }}>{{ t.name }}{{ ' (current)' if t.is_current }}{{ ' – locked' if t.is_locked }}</option>{% endfor %}
+          {% if group.grouper %}</optgroup>{% endif %}
+        {% endfor %}
+      </select>
+      <noscript><button class="linkish" type="submit">Change</button></noscript>
+    </form>
+    {% endif %}
+    <input type="checkbox" id="navtoggle" class="navtoggle" aria-label="Show the menu">
+    <label for="navtoggle" class="navbtn"><span aria-hidden="true">☰</span> Menu</label>
+    <nav class="navlist" aria-label="Main menu">
+    {% set ep = request.endpoint %}
+    {% if user.role == 'admin' %}
+      <div class="navlabel">Academic</div>
+      {{ nav('admin_dashboard', 'Dashboard', 0, 'dash') }}
+      <details {{ 'open' if ep in ('admin_settings', 'admin_classes', 'admin_class', 'admin_class_list', 'admin_subjects', 'admin_terms') }}>
+        <summary>{{ icon('school') }}School Settings</summary>
+        {{ nav('admin_settings', 'Profile') }}
+        {{ nav('admin_classes', 'Classes', 0, '', 'admin_class', 'admin_class_list') }}
+        {{ nav('admin_subjects', 'Levels & subjects') }}
+        {{ nav('admin_terms', 'Academic years') }}
+      </details>
+      <details {{ 'open' if ep in ('admin_students', 'student_edit', 'admin_import') }}>
+        <summary>{{ icon('students') }}Students</summary>
+        {{ nav('admin_students', 'All students', 0, '', 'student_edit') }}
+        {{ nav('admin_import', 'Import from Excel') }}
+      </details>
+      {{ nav('admin_teachers', 'Staffs', pending_count, 'staff', 'admin_teacher_edit') }}
+      <details {{ 'open' if ep in ('admin_reports', 'admin_activity', 'class_results', 'marks', 'admin_sheets') }}>
+        <summary>{{ icon('reports') }}Reports</summary>
+        {{ nav('admin_reports', 'Reports & monitoring', 0, '', 'class_results', 'marks') }}
+        {{ nav('admin_sheets', 'Marks sheets') }}
+        {{ nav('admin_activity', 'Activity log') }}
+      </details>
+    {% else %}
+      <div class="navlabel">Academic</div>
+      {{ nav('teacher_dashboard', 'My classes & subjects', 0, 'dash', 'marks', 'class_results', 'class_students', 'student_edit') }}
+    {% endif %}
+    <div class="spacer"></div>
+    {{ nav('account', 'My account', 0, 'me') }}
+    <div class="who"><b>{{ user.full_name }}</b>{{ 'Administrator' if user.role == 'admin' else 'Teacher' }}</div>
+    <form method="post" action="{{ url_for('logout') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button class="linkish" type="submit">{{ icon('out') }}Log out</button>
+    </form>
+    </nav>
+  </aside>
+  <main>
+    {{ flashes() }}
+    {% if active_term and school_term and active_term.id != school_term.id %}
+    <form method="post" action="{{ url_for('switch_term') }}" class="notice" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="next" value="{{ request.full_path }}"><input type="hidden" name="term_id" value="{{ school_term.id }}">
+      <span>You are working in <b>{{ active_term.name }}</b>. The school's current term is {{ school_term.name }}.</span>
+      <button class="btn sm ghost" type="submit">Back to {{ school_term.name }}</button>
+    </form>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+</div>
+{% else %}
+<body class="auth">
+<div class="authbox">
+  <div class="logo"><span>Marks system</span><b>{{ school_name }}</b></div>
+  {{ flashes() }}
+  <div class="card">{% block auth %}{% endblock %}</div>
+</div>
+{% endif %}
+{% if user %}<script>
+(function () {
+  // A page left open by one person must not quietly start working for another person.
+  var mine = document.body.getAttribute('data-user'), box = document.getElementById('switched');
+  function check() {
+    if (!box.hidden) return;
+    fetch('{{ url_for("whoami") }}', {credentials: 'same-origin', cache: 'no-store'}).then(function (r) { return r.json(); }).then(function (who) {
+      if (String(who.id) === mine) return;
+      document.getElementById('switched-text').textContent = who.id
+        ? 'This browser is now logged in as ' + who.name + ' (' + who.role + '). What you see behind this message was opened by the previous person and no longer works.'
+        : 'This browser has been logged out, so this page no longer works. Log in again to continue.';
+      document.getElementById('switched-go').textContent = who.id ? 'Continue as ' + who.name : 'Log in';
+      box.hidden = false;
+    }).catch(function () {});
+  }
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) check(); });
+  window.addEventListener('focus', check);
+  window.addEventListener('pageshow', function (e) { if (e.persisted) check(); });
+})();
+</script>{% endif %}
+{% block scripts %}{% endblock %}
+</body>
+</html>

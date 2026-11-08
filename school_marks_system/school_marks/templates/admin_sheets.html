@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Marks sheets{% endblock %}
+{% block content %}
+<div class="head">
+  <div><h1>Marks sheets</h1>
+    <div class="muted">{% if term %}{{ term.name }} · {% endif %}One Excel workbook per class: a tab for every course with the student names, and a Summary tab. Teachers fill their course's tab in Google Sheets (or Excel); you import the workbook here and print the periodical reports.</div></div>
+  <div class="actions">{% include "_term.html" %}</div>
+</div>
+
+{% if not term %}<div class="notice">Add an academic year first (School Settings → Academic years).</div>{% else %}
+<div class="card">
+  <h2>How it works</h2>
+  <ol style="margin:0;padding-left:20px;line-height:1.65">
+    <li><b>Download</b> the workbook of a class below (<b>Class workbook (Excel)</b>).</li>
+    <li><b>Put it on Google Drive</b>: drive.google.com → <b>New → File upload</b> → choose the workbook. Open it, then <b>File → Save as Google Sheets</b>.</li>
+    <li><b>Share it with the teachers of that class</b>: <b>Share</b> → type each teacher's email as <b>Editor</b> (or <i>Anyone with the link → Editor</i>) → <b>Copy link</b> and send it. Each teacher opens the tab of their own course (the tabs at the bottom, named after the course) and types the marks in the white boxes. Google saves by itself. A test is added in a green column: its name in row 5, what it is out of in row 6.</li>
+    <li><b>Check</b> the <b>Summary</b> tab: it adds up the tests of every course for every student (total, %, position), as on the periodical report.</li>
+    <li><b>Bring it back</b>: in Google Sheets <b>File → Download → Microsoft Excel (.xlsx)</b>, then import that file below.</li>
+    <li><b>Print</b>: <b>Periodical reports PDF</b> next to the class.</li>
+  </ol>
+  <p class="hint" style="margin:10px 0 0">Teachers must not change the student codes (column B) or the title in cell A2 of a tab: that is how the system knows the class, the course and the students. Sorting the rows is fine. To stop a teacher from typing in another teacher's tab, in Google Sheets right-click a tab → <b>Protect sheet</b> → <b>Set permissions</b>.</p>
+</div>
+
+<div class="card">
+  <h2>Import the filled-in workbooks</h2>
+  <form method="post" action="{{ url_for('admin_sheets_import') }}" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="term" value="{{ term.id }}">
+    <div class="field"><label for="files">Excel files (.xlsx) – one or several class workbooks</label>
+      <input type="file" id="files" name="files" multiple accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required></div>
+    <button class="btn" type="submit">Import marks</button>
+  </form>
+  <p class="hint" style="margin:10px 0 0">Only Excel files are accepted. Every course tab is checked first and imported completely or not at all: you see which courses came in and, for the others, which cell to correct. Importing the same workbook again later only brings in what changed, so you can import it as often as you like.</p>
+</div>
+
+<div class="card flush"><h2>Class workbooks</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Class</th><th class="n">Students</th><th class="n">Courses</th><th></th><th></th></tr></thead>
+    <tbody>
+    {% for c in classes %}
+      <tr><td class="strong">{{ c.name }}</td><td class="n">{{ c.n_students }}</td><td class="n">{{ c.n_courses }}</td>
+        <td>{% if c.n_courses %}<a class="btn sm ghost" href="{{ url_for('class_workbook', class_id=c.id, term=term.id) }}">Class workbook (Excel)</a>{% else %}<span class="small muted">no level chosen</span>{% endif %}</td>
+        <td><a class="btn sm" target="_blank" href="{{ url_for('periodical_pdf', class_id=c.id, term=term.id) }}">Periodical reports PDF</a></td></tr>
+    {% else %}<tr><td colspan="5" class="empty">No classes yet.</td></tr>{% endfor %}
+    </tbody>
+  </table></div>
+</div>
+{% endif %}
+{% endblock %}

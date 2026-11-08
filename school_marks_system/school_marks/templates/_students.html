@@ -1,0 +1,35 @@
+{# Student list + add forms. Used by the admin's class page and the class teacher's "My students" page. Needs: cls, students #}
+<div class="card flush" id="students">
+  <h2>Students ({{ students|length }})</h2>
+  {% if students %}
+  <div class="scroll"><table><thead><tr><th class="n">#</th><th>Name</th><th>Admission no.</th><th>Gender</th><th></th></tr></thead><tbody>
+    {% for s in students %}<tr><td class="n muted">{{ loop.index }}</td><td class="strong">{{ s.full_name }}</td><td>{{ s.admission_no }}</td><td>{{ s.gender or '–' }}</td>
+      <td class="right"><a class="btn sm ghost" href="{{ url_for('student_edit', sid=s.id) }}">Edit / delete</a></td></tr>{% endfor %}
+  </tbody></table></div>
+  {% else %}<div class="empty">No students in this class yet. Add them below.</div>{% endif %}
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <h2>Add one student</h2>
+    <form method="post" action="{{ url_for('class_students', class_id=cls.id) }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="field"><label for="full_name">Full name</label><input type="text" id="full_name" name="full_name" maxlength="80" required></div>
+      <div class="row">
+        <div class="field"><label for="gender">Gender</label><select id="gender" name="gender"><option value="">–</option><option value="F">Female</option><option value="M">Male</option></select></div>
+        <div class="field"><label for="admission_no">Admission no.</label><input type="text" id="admission_no" name="admission_no" maxlength="20" placeholder="automatic"></div>
+      </div>
+      <p style="margin-top:12px"><button class="btn" type="submit">Add student</button></p>
+    </form>
+  </div>
+  <div class="card">
+    <h2>Add many students at once</h2>
+    <form method="post" action="{{ url_for('class_students', class_id=cls.id) }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="field"><label for="bulk">One student per line</label>
+        <textarea id="bulk" name="bulk" placeholder="Thabo Nkosi, M&#10;Lerato Dlamini, F&#10;Sipho Khumalo"></textarea>
+        <div class="hint">Write the name, then optionally a comma and M or F. You can paste a list from Excel or Word. Admission numbers are given automatically.</div></div>
+      <button class="btn" type="submit">Add all</button>
+    </form>
+  </div>
+</div>

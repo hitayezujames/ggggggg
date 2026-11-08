@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Levels &amp; subjects{% endblock %}
+{% macro cat_options(current) %}{% for key, title in categories %}<option value="{{ key }}" {{ 'selected' if key == current }}>{{ title }}</option>{% endfor %}{% endmacro %}
+{% block content %}
+<div class="head"><div><h1>Levels &amp; subjects</h1><div class="muted">A level is a list of subjects with their maximums, for example S1–S3 or S4–S5 Math and Science. Every class follows one level, and that decides what is printed on its report.</div></div></div>
+
+{% if levels %}
+<div class="tabs" role="tablist" aria-label="Levels">
+  {% for l in levels %}<a role="tab" aria-selected="{{ 'true' if level and l.id == level.id else 'false' }}" class="{{ 'on' if level and l.id == level.id }}" href="{{ url_for('admin_subjects', level=l.id) }}"><b>{{ l.name }}</b><span>{{ l.n_subjects }} subjects · total {{ l.total_max|num }} · {{ l.n_classes }} class{{ '' if l.n_classes == 1 else 'es' }}</span></a>{% endfor %}
+</div>
+{% endif %}
+
+{% if level %}
+<div class="card flush">
+  <h2>Subjects of {{ level.name }}</h2>
+  <p class="hint">Change a name, group, maximum, periods or order here and press Save. The order is the order on the report inside each group. Periods per week are only shown on the Manage Class page; they do not change any mark.</p>
+  {% if subjects %}
+  <form method="post" action="{{ url_for('admin_subjects_save') }}" id="subjects-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="level" value="{{ level.id }}">
+    <div class="scroll"><table class="edit">
+      <thead><tr><th>Subject</th><th>Short code</th><th>Group on report</th><th class="n">Maximum</th><th class="n">Periods / week</th><th class="n">Order</th><th class="n">Classes</th><th class="n">Marks</th><th></th></tr></thead>
+      <tbody>
+      {% for s in subjects %}
+        <tr>
+          <td><input type="text" name="name_{{ s.id }}" value="{{ s.name }}" maxlength="60" required aria-label="Subject name"></td>
+          <td><input type="text" name="code_{{ s.id }}" value="{{ s.code }}" maxlength="6" required class="short" aria-label="Short code of {{ s.name }}"></td>
+          <td><select name="category_{{ s.id }}" aria-label="Group of {{ s.name }}">{{ cat_options(s.category) }}</select></td>
+          <td class="n"><input type="number" name="max_{{ s.id }}" value="{{ s.max_mark|num }}" min="1" max="1000" step="any" required class="short" aria-label="Maximum of {{ s.name }}"></td>
+          <td class="n"><input type="number" name="periods_{{ s.id }}" value="{{ s.periods if s.periods is not none else '' }}" min="0" max="60" step="1" class="short" aria-label="Periods per week of {{ s.name }}"></td>
+          <td class="n"><input type="number" name="order_{{ s.id }}" value="{{ s.sort_order }}" min="0" max="999" step="1" class="short" aria-label="Order of {{ s.name }}"></td>
+          <td class="n">{{ s.n_classes }}</td><td class="n">{{ s.n_marks }}</td>
+          <td class="right"><button class="btn sm danger" type="submit" form="del-{{ s.id }}">Delete</button></td>
+        </tr>
+      {% endfor %}
+        <tr class="total"><td colspan="3">TOTAL on the report when a class takes all of these subjects</td><td class="n">{{ total_max|num }}</td><td class="n">{{ subjects|selectattr('periods')|sum(attribute='periods') or '' }}</td><td colspan="4"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="savebar"><button class="btn" type="submit">Save subjects</button></div>
+  </form>
+  {% for s in subjects %}
+  <form id="del-{{ s.id }}" method="post" action="{{ url_for('admin_subject_delete', sid=s.id) }}" onsubmit="return confirm('{% if s.n_classes or s.n_assess %}DELETE this subject from this level? It is removed from every class of the level and its {{ s.n_marks }} marks in every term are deleted for good. This cannot be undone.{% else %}Delete this subject?{% endif %}')"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"></form>
+  {% endfor %}
+  {% else %}<div class="empty">{{ level.name }} has no subjects yet. Add them below.</div>{% endif %}
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <h2>Add a subject to {{ level.name }}</h2>
+    <form method="post" action="{{ url_for('admin_subjects', level=level.id) }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="field"><label for="name">Subject name</label><input type="text" id="name" name="name" maxlength="60" required placeholder="e.g. Geography"></div>
+      <div class="row">
+        <div class="field"><label for="category">Group on report</label><select id="category" name="category">{{ cat_options('core') }}</select></div>
+        <div class="field narrow"><label for="max_mark">Maximum</label><input type="number" id="max_mark" name="max_mark" min="1" max="1000" step="any" required placeholder="30"></div>
+        <div class="field narrow"><label for="periods">Periods / week</label><input type="number" id="periods" name="periods" min="0" max="60" step="1" placeholder="3"></div>
+        <div class="field narrow"><label for="code">Short code</label><input type="text" id="code" name="code" maxlength="6" placeholder="automatic"></div>
+      </div>
+      <p style="margin:12px 0 0"><button class="btn" type="submit">Add subject</button></p>
+    </form>
+  </div>
+  <div class="card">
+    <h2>This level</h2>
+    <form method="post" action="{{ url_for('admin_level_action', level_id=level.id, action='rename') }}" class="row">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="field"><label for="level_name">Name of the level</label><input type="text" id="level_name" name="name" value="{{ level.name }}" maxlength="60" required></div>
+      <button class="btn ghost" type="submit">Rename</button>
+    </form>
+    <p class="hint" style="margin-top:12px">{{ level.n_classes }} class{{ '' if level.n_classes == 1 else 'es' }} follow{{ 's' if level.n_classes == 1 }} this level. Choose the level of a class when you add the class.</p>
+    {% if not level.n_classes and not level.n_subjects %}
+    <form method="post" action="{{ url_for('admin_level_action', level_id=level.id, action='delete') }}" onsubmit="return confirm('Delete this empty level?')">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn sm danger" type="submit">Delete this level</button></form>
+    {% else %}<p class="hint" style="margin-bottom:0">A level can be deleted only when it has no subjects and no classes.</p>{% endif %}
+  </div>
+</div>
+{% else %}
+<div class="notice">There are no levels yet. Load a ready-made list below, or add your own level.</div>
+{% endif %}
+
+<div class="grid2">
+  <div class="card">
+    <h2>Add another level</h2>
+    <form method="post" action="{{ url_for('admin_level_add') }}" class="row">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="field"><label for="new_level">Name</label><input type="text" id="new_level" name="name" maxlength="60" required placeholder="e.g. S4, S5 - Arts"></div>
+      <button class="btn" type="submit">Add level</button>
+    </form>
+    <p class="hint" style="margin:10px 0 0">Use a new level when a group of classes has different subjects or different maximums, for example another S4–S6 combination. Then add its subjects.</p>
+  </div>
+  <div class="card">
+    <h2>Ready-made subject lists</h2>
+    {% for st in standard %}
+    <form method="post" action="{{ url_for('admin_subjects_standard', key=st.key) }}" style="margin-bottom:12px" onsubmit="return confirm('{{ 'Add the missing subjects and set the standard group, maximum and order on the ones that already exist?' if st.exists else 'Create this level with its subjects?' }}')">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div><b>{{ st.name }}</b> <span class="small muted">· {{ st.count }} subjects · total {{ st.total|num }}</span>
+        {% if not st.exists %}<span class="tag wait">not loaded</span>{% elif st.missing %}<span class="tag wait">{{ st.missing|length }} missing</span>{% else %}<span class="tag ok">complete</span>{% endif %}</div>
+      {% if st.exists and st.missing %}<div class="small muted">Missing: {{ st.missing|join(', ') }}</div>{% endif %}
+      <button class="btn sm ghost" type="submit" style="margin-top:6px;white-space:normal;text-align:left">{{ 'Create this level' if not st.exists else ('Add the missing subjects' if st.missing else 'Reset to the standard maximums and order') }}</button>
+    </form>
+    {% endfor %}
+    <p class="hint" style="margin:0">These follow your school&#39;s reports. Resetting never deletes subjects or marks; it only puts back the standard group, maximum and order.</p>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ cls.name }} class list{% endblock %}
+{% block content %}
+<div class="head">
+  <div><div class="crumb"><a href="{{ url_for('admin_classes') }}">Classes</a> ›</div>
+    <h1>{{ cls.name }} <span class="muted">· class list</span></h1>
+    <div class="muted">{{ cls.grade_shown or 'Grade not set' }} · {{ cls.combination_shown or 'Combination not set' }} · Class teacher: {{ cls.class_teacher_name or 'not chosen' }}</div></div>
+  <div class="actions">
+    <a class="btn ghost" href="{{ url_for('admin_class', class_id=cls.id) }}">Manage class</a>
+    <a class="btn ghost" href="{{ url_for('admin_class', class_id=cls.id, tab='students') }}">Add or edit students</a>
+    <a class="btn" target="_blank" href="{{ url_for('admin_class_list_pdf', class_id=cls.id) }}">Class list PDF</a>
+  </div>
+</div>
+<div class="classgroup">
+  <div class="cg-head"><span class="cg-dot" aria-hidden="true"></span><span class="cg-title"><b>{{ cls.name }}</b><span>{{ cls.grade_shown }}{% if cls.combination_shown %} · {{ cls.combination_shown }}{% endif %}</span></span>
+    <span class="cg-count">{{ students|length }} student{{ '' if students|length == 1 else 's' }}</span></div>
+  {% if students %}
+  <div class="scroll"><table class="classes">
+    <thead><tr><th>No.</th><th>Student code</th><th>Names</th><th>Gender</th><th class="acts-h">Actions</th></tr></thead>
+    <tbody>
+    {% for s in students %}
+      <tr><td>{{ loop.index }}</td><td>{{ s.admission_no }}</td><td class="strong">{{ s.full_name }}</td><td>{{ s.gender or '–' }}</td>
+        <td class="acts-c"><a class="btn sm ghost" href="{{ url_for('student_edit', sid=s.id) }}">Edit / delete</a></td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+  {% else %}<div class="empty">This class has no students yet. Use “Add or edit students”, or import the student lists.</div>{% endif %}
+</div>
+<p class="hint">Only the administrator sees this page. A class teacher sees the students of their own class under “Students”.</p>
+{% endblock %}

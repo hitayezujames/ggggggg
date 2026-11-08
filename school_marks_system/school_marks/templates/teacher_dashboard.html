@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}My classes &amp; subjects{% endblock %}
+{% block content %}
+<div class="head"><div><h1>Welcome, {{ user.full_name }}</h1><div class="muted">{% if term %}{{ term.name }}{% if term.is_locked %} · <span class="tag off">locked – marks cannot be changed</span>{% endif %}{% else %}The admin has not created a term yet.{% endif %}</div></div>
+  {% if term %}{% include "_term.html" %}{% endif %}</div>
+
+{% if my_classes %}
+<div class="card flush"><h2>My class (class teacher)</h2>
+  <p class="hint">{% if ct_results %}Add or delete students, see the results of the class, write conduct and remarks and print report cards.{% else %}Add or delete students and write their conduct and remarks. The marks of the other teachers and the report cards are with the administrator.{% endif %}</p>
+  <table><thead><tr><th>Class</th><th class="n">Students</th><th class="n">Subjects</th><th></th></tr></thead><tbody>
+  {% for c in my_classes %}
+    <tr><td class="strong">{{ c.name }}</td><td class="n">{{ c.n_students }}</td><td class="n">{{ c.n_subjects }}</td>
+      <td class="right nowrap"><a class="btn sm ghost" href="{{ url_for('class_students', class_id=c.id) }}">Students</a> {% if term %}<a class="btn sm" href="{{ url_for('class_results', class_id=c.id, term=term.id) }}">{{ 'Results &amp; report cards'|safe if ct_results else 'Conduct &amp; remarks'|safe }}</a>{% endif %}</td></tr>
+  {% endfor %}
+  </tbody></table></div>
+{% endif %}
+
+<div class="card flush"><h2>My subjects</h2>
+  <p class="hint">Open a subject to see its students and enter their marks. Only you and the administrator can see or change these marks.</p>
+  {% if progress %}{% with show_teacher=false %}{% include "_progress.html" %}{% endwith %}
+  {% elif term %}<div class="empty">The admin has not assigned a subject to you yet. Once they do, your classes and students appear here.</div>
+  {% else %}<div class="empty">Marks can be entered once the admin has created a term.</div>{% endif %}
+</div>
+{% endblock %}
